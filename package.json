@@ -1,0 +1,23 @@
+{
+  "name": "frankrowe.org",
+  "version": "0.0.0",
+  "description": "frankrowe.org =============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankrowe/frankrowe.org"
+  },
+  "author": "Frank Rowe <fsrowe@gmail.com> (http://frankrowe.org/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frankrowe/frankrowe.org/issues"
+  },
+  "homepage": "https://github.com/frankrowe/frankrowe.org",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "mkpath": "^0.1.0"
+  }
+}

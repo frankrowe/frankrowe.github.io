@@ -1,0 +1,82 @@
+body {
+  
+}
+
+.container {
+
+}
+
+a {
+  text-decoration: none;
+  color: #058145;
+}
+
+a:hover {
+  color: #058145;
+}
+
+.topbar {
+  width: 100%;
+  height: 20px;
+  background: #058145;
+  border-bottom: 1px solid #333;
+}
+
+.container {
+
+}
+
+header {
+  overflow: hidden;
+  background: red;
+}
+
+header .profile {
+  overflow: hidden;
+  float: left;
+  padding: 15px;
+  margin-right: 15px;
+}
+
+header .header-text {
+
+}
+
+.header-text h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+header a {
+  color: #333;
+}
+
+.contact-bar {
+  overflow: hidden;
+  margin: 20px 0 20px 0;
+}
+
+.contact-bar ul.navigation {
+  float: right;
+  list-style: none;
+  margin-bottom: 0px;
+}
+
+ul.navigation li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.post {
+  width: 720px;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc;
+}
+
+.post img {
+  margin: 0 auto;
+}
+
+.post h2 {
+  
+}
