@@ -13,7 +13,8 @@ function renderPages() {
   fs.readdir(page_dir, function(err, files) {
     files.forEach(function(page) {
       var html = renderPage(path.join(page_dir, page), {
-        title: 'frankrowe.org'
+        title: 'frankrowe.org',
+        posts: posts
       })
       var html_path = path.basename(page, '.ejs') + '.html'
       fs.writeFile(html_path, html)

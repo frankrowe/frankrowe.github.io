@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-
+  padding-bottom: 60px;
 }
 
 a {
@@ -78,5 +78,10 @@ ul.navigation li {
 }
 
 .post h2 {
-  
+  margin-bottom: 0px;  
+}
+
+.post .date {
+  font-size: 12px;
+  color: #bbb;
 }

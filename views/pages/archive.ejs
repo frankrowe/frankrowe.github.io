@@ -1,0 +1,12 @@
+<% include ../includes/header %>
+<div class="post">
+  <h2>Archive</h2>
+  <ul>
+  <% posts.forEach(function(post) { %>
+    <% if (post.published) { %>
+    <li><a href="/posts/<%= post.date %>/<%= post.file %>.html"><%= post.title %></a></li>
+    <% } %>
+  <% }) %>
+  </ul>
+</div>
+<% include ../includes/footer %>
