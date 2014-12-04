@@ -78,7 +78,11 @@ ul.navigation li {
 }
 
 .post h2 {
-  margin-bottom: 0px;  
+  margin-bottom: 0px;
+}
+
+.post h2 a {
+  color: #333;
 }
 
 .post .date {

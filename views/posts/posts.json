@@ -9,9 +9,9 @@
   {
     "id": 2,
     "date": "07/24/2014",
-    "title": "Map Rendering in the Cloud",
+    "title": "Map Rendering with TileMill and Amazon EC2",
     "file": "cloud-render",
-    "published": false
+    "published": true
   },
   {
     "id": 3,
@@ -39,6 +39,13 @@
     "date": "12/02/2014",
     "title": "Leaflet Crosshairs",
     "file": "leaflet-crosshairs",
+    "published": true
+  },
+  {
+    "id": 7,
+    "date": "12/04/2014",
+    "title": "Improved GeoDash Interaction",
+    "file": "better-chart-hover",
     "published": true
   }
 ]

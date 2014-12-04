@@ -22,8 +22,8 @@
           <ul class="navigation">
             <li><a href="/">frankrowe.org</a></li>
             <li><a href="https://twitter.com/fsrowe">@fsrowe</a></li>
-            <li><a href="https://github.com/frankrowe">GitHub</a></li>
             <li><a href="mailto:fsrowe@gmail.com">fsrowe@gmail.com</a></li>
+            <li><a href="https://github.com/frankrowe">GitHub</a></li>
             <li><a href="/archive.html">Archive</a></li>
             <li><a href="/about.html">About</a></li>
           </ul>
@@ -32,6 +32,13 @@
     </div>
       <div class="row">
         <div class="col-md-12">
+<div class="post">
+  <h2><a href="/posts/12/04/2014/better-chart-hover.html">Improved GeoDash Interaction</a></h2>
+  <p class="date">12/04/2014</p>
+  <p class="text-center"><img src="/img/geodash-hover.png"></p>
+<p>Hovering points on line charts was becoming harder and harder as data size increased and point radius decreased. Solution? Bigger mouse targets on top of data points. Reduce target opacity to zero and find the matching data point on mouse over, and bam - much better interactivity.</p>
+<p>Live demo: <a href="http://frankrowe.github.io/geodash/">http://frankrowe.github.io/geodash/</a></p>
+</div>
 <div class="post">
   <h2><a href="/posts/12/02/2014/leaflet-crosshairs.html">Leaflet Crosshairs</a></h2>
   <p class="date">12/02/2014</p>
@@ -47,6 +54,22 @@
 <p>GeoDash is a minimal javascript chart library. It's built on <a href="http://d3js.org">D3</a> and supports horizontal and vertical bar charts, stacked bar charts, pie charts and line charts.</p>
 <p>Why is it called GeoDash? Mostly because I built this while building "geodashboards" that usually involved a map. Also because using "geo" in anything makes it cool.</p>
 <p>Live demo: <a href="http://frankrowe.github.io/geodash/">http://frankrowe.github.io/geodash/</a></p>
+</div>
+<div class="post">
+  <h2><a href="/posts/07/24/2014/cloud-render.html">Map Rendering with TileMill and Amazon EC2</a></h2>
+  <p class="date">07/24/2014</p>
+  <p><img src="/img/denver.jpeg"></p>
+<p>Rendering with TileMill and PostGIS on Amazon EC2.</p>
+<p>1. Load data into PostGIS.</p>
+<p>2. Create shapefile of desired map.</p>
+<p>3. Create local TileMill project to generate project.mml file.</p>
+<p>4. Create Amazon EC2 server loaded with TileMill. Use Springmeyer's awesome <a href="https://gist.github.com/springmeyer/b0bbcd976378cf3e4e44">guide</a> for this.</p>
+<p>5. Upload shapefile to EC2 server.</p>
+<p>6. Upload tilemill project to EC2 server.</p>
+<p>7. Render map to mbtiles.</p>
+<p>8. Download mbtiles to wherever the map will be served.</p>
+<p>9. ???</p>
+<p>10. Profit.</p>
 </div>        </div>
       </div>
     </div>
