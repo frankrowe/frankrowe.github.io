@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Map Rendering in the Cloud</title>
+    <title>Map Rendering with TileMill and Amazon EC2</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
@@ -22,8 +22,9 @@
           <ul class="navigation">
             <li><a href="/">frankrowe.org</a></li>
             <li><a href="https://twitter.com/fsrowe">@fsrowe</a></li>
-            <li><a href="https://github.com/frankrowe">GitHub</a></li>
             <li><a href="mailto:fsrowe@gmail.com">fsrowe@gmail.com</a></li>
+            <li><a href="https://github.com/frankrowe">GitHub</a></li>
+            <li><a href="/archive.html">Archive</a></li>
             <li><a href="/about.html">About</a></li>
           </ul>
         </div>
@@ -32,9 +33,20 @@
       <div class="row">
         <div class="col-md-12">
 <div class="post">
-  <h2><a href="/posts/2014/07/24/cloud-render.html">Map Rendering in the Cloud</a></h2>
+  <h2><a href="/posts/2014/07/24/cloud-render.html">Map Rendering with TileMill and Amazon EC2</a></h2>
+  <p class="date">2014/07/24</p>
   <p><img src="/img/denver.jpeg"></p>
 <p>Rendering with TileMill and PostGIS on Amazon EC2.</p>
+<p>1. Load data into PostGIS.</p>
+<p>2. Create shapefile of desired map.</p>
+<p>3. Create local TileMill project to generate project.mml file.</p>
+<p>4. Create Amazon EC2 server loaded with TileMill. Use Springmeyer's awesome <a href="https://gist.github.com/springmeyer/b0bbcd976378cf3e4e44">guide</a> for this.</p>
+<p>5. Upload shapefile to EC2 server.</p>
+<p>6. Upload tilemill project to EC2 server.</p>
+<p>7. Render map to mbtiles.</p>
+<p>8. Download mbtiles to wherever the map will be served.</p>
+<p>9. ???</p>
+<p>10. Profit.</p>
 </div>        </div>
       </div>
     </div>
