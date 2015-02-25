@@ -47,5 +47,12 @@
     "title": "Improved GeoDash Interaction",
     "file": "better-chart-hover",
     "published": true
+  },
+  {
+    "id": 8,
+    "date": "2015/02/25",
+    "title": "So Long",
+    "file": "so-long",
+    "published": true
   }
 ]

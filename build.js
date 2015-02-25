@@ -8,7 +8,7 @@ var page_dir = './views/pages/'
 var post_dir = './views/posts/'
 var header_template =  handlebars.compile(fs.readFileSync('views/includes/header.hbs', 'utf8'))
 var footer_template =  handlebars.compile(fs.readFileSync('views/includes/footer.hbs', 'utf8'))
-var posts = require(post_dir + 'posts.json')
+var posts = require('./posts.json')
 var post_index = 1
 posts.forEach(function(post) {
   post.display_date = moment(post.date, 'YYYY/MM/DD').format('MMM DD, YYYY')
