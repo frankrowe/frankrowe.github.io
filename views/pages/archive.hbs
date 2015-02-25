@@ -1,0 +1,13 @@
+<div class="post archive">
+  <table class="archive">
+  <tbody>
+  {{#each posts}}
+    <tr>
+    {{#if published}}
+    <td>{{ post_index }}<td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td>{{ display_date }}</td>
+    {{/if}}
+    </tr>
+  {{/each}}
+  </tbody>
+  </table>
+</div>

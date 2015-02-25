@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/frankrowe/frankrowe.org",
   "dependencies": {
-    "ejs": "^1.0.0",
-    "mkpath": "^0.1.0"
+    "hbs": "^2.8.0",
+    "mkpath": "^0.1.0",
+    "moment": "^2.9.0"
   }
 }
