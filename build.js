@@ -28,7 +28,7 @@ function renderPages() {
     files.forEach(function(page) {
       var title = capitalize(path.basename(page, '.hbs'))
       var html = header_template({
-        title: title
+        title: title + ' | frankrowe.org'
       })
       html += renderPage(path.join(page_dir, page), {
         posts: posts
@@ -69,7 +69,7 @@ function renderPosts() {
   posts.forEach(function(post) {
     if (post.published) {
       var html = header_template({
-        title: post.title
+        title: post.title + ' | frankrowe.org'
       })
       html += renderPost(post)
       html += footer_template()
