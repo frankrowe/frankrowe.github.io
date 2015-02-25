@@ -3,6 +3,7 @@ body {
   font-size: 14px;
   font-family: 'Oxygen', sans-serif;
   font-weight: 300;
+  background: #fffffd;
 }
 
 .container {
@@ -20,9 +21,9 @@ a:hover {
 
 .topbar {
   width: 100%;
-  height: 20px;
+  height: 8px;
   background: #058145;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #045b31;
 }
 
 .container {
@@ -31,7 +32,6 @@ a:hover {
 
 header {
   overflow: hidden;
-  background: red;
 }
 
 header .profile {
@@ -56,7 +56,14 @@ header a {
 
 .contact-bar {
   overflow: hidden;
-  margin: 20px 0 20px 0;
+  width: 720px;
+  margin: 20px auto;
+}
+
+.contact-bar img:hover {
+  filter: none;
+  -webkit-filter: grayscale(1);
+  cursor: pointer;
 }
 
 .contact-bar ul.navigation {
