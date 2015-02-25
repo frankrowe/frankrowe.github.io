@@ -1,12 +1,15 @@
 <% include ../includes/header %>
-<div class="post">
-  <h2>Archive</h2>
-  <ul>
-  <% posts.forEach(function(post) { %>
+<div class="post archive">
+  <table class="archive">
+  <tbody>
+  <% posts.forEach(function(post, idx) { %>
+    <tr>
     <% if (post.published) { %>
-    <li><a href="/posts/<%= post.date %>/<%= post.file %>.html"><%= post.title %></a></li>
+    <td><%= post.post_index %><td><a href="/posts/<%= post.date %>/<%= post.file %>.html"><%= post.title %></a></td><td><%= post.date %></td>
     <% } %>
+    </tr>
   <% }) %>
-  </ul>
+  </tbody>
+  </table>
 </div>
 <% include ../includes/footer %>

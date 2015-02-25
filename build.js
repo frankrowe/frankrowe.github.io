@@ -8,6 +8,14 @@ var post_dir = './views/posts/'
 var header_template = fs.readFileSync('views/includes/header.ejs', 'utf8')
 var footer_template = fs.readFileSync('views/includes/footer.ejs', 'utf8')
 var posts = require(post_dir + 'posts.json')
+var post_index = 1
+posts.forEach(function(post) {
+  if (post.published) {
+    post.post_index = post_index
+    post_index++
+  }
+})
+posts.reverse()
 
 function renderPages() {
   fs.readdir(page_dir, function(err, files) {
@@ -33,7 +41,7 @@ function renderIndex() {
   var index = ejs.render(header_template, {
     title: 'frankrowe.org'
   })
-  posts.reverse() //reverse chronological
+  //posts.reverse() //reverse chronological
   posts.forEach(function(post) {
     if (post.published) {
       index += renderPost(post)
