@@ -14,11 +14,6 @@ body {
 .container {
   padding-bottom: 60px;
 }
-
-.marker {
-  float: left;
-}
-
 a {
   text-decoration: none;
   color: #058145;
@@ -79,12 +74,20 @@ header a {
   float: right;
   list-style: none;
   margin-bottom: 0px;
+  width: 100%;
+  padding: 0 0 0 20px;
+  text-align: right;
 }
 
 ul.navigation li {
   display: inline-block;
   margin-left: 10px;
 }
+
+.marker {
+  position: absolute;
+}
+
 
 .post {
   max-width: 720px;
