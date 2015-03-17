@@ -40,7 +40,7 @@
   <p class="date">Mar 17, 2015</p>
   <p style="text-align: center"><img src="/img/vector-tiles.jpg" class="img-responsive"></p>
 <p>I have seen a lot of talk about <a href="https://github.com/google/protobuf/">protobol buffers</a> and <a href="https://www.mapbox.com/developers/vector-tiles/">vector tiles</a> recently, which promises improved performance loading and rendering layers than just plain geojson. I've seen a lot of demos of the tech, but had trouble putting it all together. This is my first attempt at creating a server that will query PostGIS, serve vector tiles encoded into protobuf, and render them on a Leaflet map.</p>
-<p>First, we will create a layer in Leaflet, using the excellent <a href="https://github.com/SpatialServer/Leaflet.MapboxVectorTile">Leaflet.MapboxVectorTile</a> plugin.</p>
+<p>Create a layer in Leaflet, using the excellent <a href="https://github.com/SpatialServer/Leaflet.MapboxVectorTile">Leaflet.MapboxVectorTile</a> plugin.</p>
 <pre><code class="js">var vectorTileLayer = new L.TileLayer.MVTSource({
   url: '/vector-tiles/layername/{z}/{x}/{y}.pbf',
   clickableLayers: ['layername'],
@@ -49,11 +49,11 @@
   }
 })
 map.addLayer(vectorTileLayer)</code></pre>
-<p>Now, we will create a route to match the above URL. Create a node server with Express, and add a route similar to a standard tile layer:</p>
+<p>Create a route to match the above URL. Create a node server with Express, and add a route similar to a standard tile layer:</p>
 <pre><code class="js">router.get('/vector-tiles/:layername/:z/:x/:y.pbf', function(req, res) {
 
 })</code></pre>
-<p>Next, get the bounding box of our data, using the <a href="https://www.npmjs.com/package/sphericalmercator">sphericalmercator</a> library</p>
+<p>Get the bounding box of our data, using the <a href="https://www.npmjs.com/package/sphericalmercator">sphericalmercator</a> library</p>
 <pre><code class="js">var SphericalMercator = require('sphericalmercator')
 var mercator = new SphericalMercator({
   size: 256 //tile size
