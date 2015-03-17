@@ -3,6 +3,7 @@ var fs = require('fs')
   , mkpath = require('mkpath')
   , handlebars = require('hbs').handlebars
   , moment = require('moment')
+  , watch = require('watch')
 
 var page_dir = './views/pages/'
 var post_dir = './views/posts/'
@@ -84,3 +85,20 @@ function renderPosts() {
 renderPages()
 renderIndex()
 renderPosts()
+
+console.log('watching...')
+var opts = {
+  ignoreDotFiles: true,
+  ignoreDirectoryPattern: /node_modules/
+}
+var idx = 0
+watch.createMonitor('./views', opts, function (monitor) {
+  monitor.on("changed", function (f, curr, prev) {
+    idx++
+    // Handle file changes
+    console.log('rendering...', idx)
+    renderPages()
+    renderIndex()
+    renderPosts()
+  })
+})

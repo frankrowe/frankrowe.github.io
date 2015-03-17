@@ -11,12 +11,22 @@ body {
   background: #fffffd;
 }
 
+pre {
+  padding: 0;
+  border: none;
+  background: inherit;
+}
+
 .container {
   padding-bottom: 60px;
 }
 a {
   text-decoration: none;
   color: #058145;
+}
+
+p > a {
+  background: #fffff0;
 }
 
 a:hover {

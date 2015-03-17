@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PostGIS to Protobuf (with vector tiles) | frankrowe.org</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="topbar"></div>
+    <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="contact-bar">
+          <a href="/" class="marker"><img src="/img/locality-green.png" alt=""></a>
+          <ul class="navigation">
+            <li><a href="/">frankrowe.org</a></li>
+            <li><a href="https://twitter.com/fsrowe">@fsrowe</a></li>
+            <li><a href="https://github.com/frankrowe">GitHub</a></li>
+            <li><a href="/archive.html">Archive</a></li>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-md-12"><div class="post">
+  <h2><a href="/posts/2015/03/17/postgis-to-protobuf.html">PostGIS to Protobuf (with vector tiles)</a></h2>
+  <p class="date">Mar 17, 2015</p>
+  <p style="text-align: center"><img src="/img/vector-tiles.jpg" class="img-responsive"></p>
+<p>I have seen a lot of talk about <a href="https://github.com/google/protobuf/">protobol buffers</a> and <a href="https://www.mapbox.com/developers/vector-tiles/">vector tiles</a> recently, promising much better performance loading and rendering layers than just plain geojson. I've seen a lot of demos of the tech, but had trouble putting it all together. This is my first attempt at creating a server that will query PostGIS, serve vector tiles encoded into protobuf, and render them on a Leaflet map.</p>
+<p>First, we will create a layer in Leaflet, using the excellent <a href="https://github.com/SpatialServer/Leaflet.MapboxVectorTile">Leaflet.MapboxVectorTile</a> plugin.</p>
+<pre><code class="js">var vectorTileLayer = new L.TileLayer.MVTSource({
+  url: '/vector-tiles/layername/{z}/{x}/{y}.pbf',
+  clickableLayers: ['layername'],
+  getIDForLayerFeature: function(feature) {
+    return feature._id
+  }
+})
+map.addLayer(vectorTileLayer)</code></pre>
+<p>Now, we will create a route to match the above URL. Create a node server with Express, and add a route similar to a standard tile layer:</p>
+<pre><code class="js">router.get('/vector-tiles/:layername/:z/:x/:y.pbf', function(req, res) {
+
+})</code></pre>
+<p>Next, get the bounding box of our data, using the <a href="https://www.npmjs.com/package/sphericalmercator">sphericalmercator</a> library</p>
+<pre><code class="js">var SphericalMercator = require('sphericalmercator')
+var mercator = new SphericalMercator({
+  size: 256 //tile size
+})
+var bbox = mercator.bbox(
+  +req.params.x,
+  +req.params.y,
+  +req.params.z,
+  false,
+  '4326'
+)</code></pre>
+<p>Use this bounding box to query PostGIS for the data we need for this tile. Convert the resulting rows into a single geojson feature collection.</p>
+<pre><code class="sql">select st_asgeojson(geom) as feature from table where st_intersects(geom, bbox)
+</code></pre>
+<p>Now that we have the geojson for the tile, we can create a vector tile using <a href="https://www.npmjs.com/package/mapnik">node-mapnik</a></p>
+<pre><code class="js">var mapnik = require('mapnik')
+var vtile = new mapnik.VectorTile(+req.params.z, +req.params.x, +req.params.y)
+vtile.addGeoJSON(JSON.stringify(geojson), 'layername')</code></pre>
+<p>Finally, use vtile.getData() to get the protobuf-encoded buffer from the vector tile, pass it through zlib.deflate to compress, set the correct headers, and serve it.</p>
+<pre><code class="js">res.setHeader('Content-Encoding', 'deflate')
+res.setHeader('Content-Type', 'application/x-protobuf')
+zlib.deflate(vtile.getData(), function(err, pbf) {
+  res.send(pbf)
+})
+</code></pre>
+<p>Your vectorTileLayer in Leaflet should now be working.</p>
+<p>So far, this seems to load complex layers much faster than querying and returning the entire geojson for a bounding box, and has the advantage of sending actual vector data to the client, unlike a traditional tile layer.</p>
+<p>Discuss with me on <a href="https://twitter.com/fsrowe">twitter</a>.</p>
+</div>        </div>
+      </div>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-60186639-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad()</script>
+  </body>
+</html>

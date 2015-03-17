@@ -19,6 +19,7 @@
   "dependencies": {
     "hbs": "^2.8.0",
     "mkpath": "^0.1.0",
-    "moment": "^2.9.0"
+    "moment": "^2.9.0",
+    "watch": "^0.14.0"
   }
 }
