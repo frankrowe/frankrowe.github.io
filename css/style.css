@@ -98,6 +98,10 @@ ul.navigation li {
   position: absolute;
 }
 
+.marker img {
+  height: 30px;
+  width: 20px;
+}
 
 .post {
   max-width: 720px;
