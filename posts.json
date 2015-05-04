@@ -68,5 +68,12 @@
     "title": "PostGIS to Protobuf (with vector tiles)",
     "file": "postgis-to-protobuf",
     "published": true
+  },
+  {
+    "id": 11,
+    "date": "2015/05/04",
+    "title": "Simplify a GeoJSON file in ugis",
+    "file": "ugis-simplify",
+    "published": true
   }
 ]
