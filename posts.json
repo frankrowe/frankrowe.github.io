@@ -72,8 +72,8 @@
   {
     "id": 11,
     "date": "2015/05/04",
-    "title": "Simplify a GeoJSON file in ugis",
-    "file": "ugis-simplify",
+    "title": "Simplify a GeoJSON file in iso",
+    "file": "iso-simplify",
     "published": true
   }
 ]
