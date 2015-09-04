@@ -8,7 +8,12 @@ body {
   font-size: 14px;
   font-family: 'Oxygen', sans-serif;
   font-weight: 300;
-  background: #fffffd;
+  background: #ffffff;
+}
+
+p {
+  line-height: 24px;
+  color: #444;
 }
 
 pre {
@@ -150,5 +155,5 @@ table.archive td:last-child {
 }
 
 td {
-  
+
 }
