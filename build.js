@@ -4,6 +4,7 @@ var fs = require('fs')
   , handlebars = require('hbs').handlebars
   , moment = require('moment')
   , watch = require('watch')
+  , toTitleCase = require('titlecase')
 
 var page_dir = './views/pages/'
 var post_dir = './views/posts/'
@@ -68,6 +69,7 @@ function renderPost(post) {
 
 function renderPosts() {
   posts.forEach(function(post) {
+    //post.title = toTitleCase(post.title)
     if (post.published) {
       var html = header_template({
         title: post.title + ' | frankrowe.org'

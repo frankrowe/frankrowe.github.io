@@ -36,6 +36,46 @@
     </div>
       <div class="row">
         <div class="col-md-12"><div class="post">
+  <h2><a href="/posts/2015/09/04/dynamic-legend.html">Creating a Dynamic Legend</a></h2>
+  <p class="date">Sep 04, 2015</p>
+  <p>
+  Recently I encountered the problem of creating a dynamic legend - a legend that only shows a layer if it has features visible in the current map view.
+</p>
+<p style="text-align: center"><img src="/img/legend.png" class="img-responsive"></p>
+<p>
+  For maps with just a few simple layers, this is pretty easy and something you can do on the client with a library like <a href="http://turfjs.org/static/docs/module-turf_intersect.html">turf-intersect</a>. But for this project, I had hundreds of complex layers covering most of the United States and Canada. I needed to come up with the fastest way possible to check every one of these layers for features in the current map view.
+</p>
+<p>
+  This first thing I did was create a function that looped through every layer and ran a simple query to count the number of geometries that intersected the map's bounding box. I aggregated these results up and sent it back, where the client would hide a layer if there were zero intersecting geometries. This worked, but it was agonizingly slow. Every map pan caused a 20-30 second request to fire, usually not even finishing before you wanted to pan the map again.
+</p>
+<p>
+  Three things needed to be done to make this legend faster:
+  <ol>
+    <li>Reduce the number of layers that needed to be checked.</li>
+    <li>Reduce the number of queries that needed to be run for layers that did need to be checked.</li>
+    <li>Make the query that checks for intersection as fast as possible.</li>
+  </ol>
+</p>
+<p>
+  For step 1, I pre-calculated each layer's bounding box and sent that to the client on the initial map load. Now I could loop through and check if each layers' bbox intersected the map's. If it didn't intersect, I wouldn't have to go back to the server to check that layer. In many cases this reduced the number of layers to check by nearly half.
+</p>
+<p>
+  For step 2, instead of looping and running an intersects query for each layer, I <a href="http://www.postgresql.org/docs/8.3/static/queries-union.html">unioned</a> each query together. This eliminated all the overhead of starting and executing hundreds of queries on each map move.
+</p>
+<p>
+  Finally, I had to make the actual query as fast as possible. I realized that I didn't need to return the actual number of geometries that intersected, I just need a true or false. For some layers with 1M+ points and a large bounding box, counting was a big deal. Instead of selecting count(), I just selected "layerName" and added a limit of 1. Only the tables with intersecting geometries would be returned. The final query turned into something like this:
+</p>
+<pre><code class="sql">(select 'layerA' from schema.layerA where st_intersects(geom, st_geometryfromtext(bbox, 4326)) limit 1)
+union
+(select 'layerB' from schema.layerB where st_intersects(geom, st_geometryfromtext(bbox, 4326)) limit 1)
+union
+(select 'layerC' from schema.layerC where st_intersects(geom, st_geometryfromtext(bbox, 4326)) limit 1)
+</code></pre>
+<p>
+  The legend now was pretty fast at responding on every map pan. The request was down to 2s instead of 20-30s previously. We now had a legend that always showed only what was needed, and a much more usable map.
+</p>
+
+</div><div class="post">
   <h2><a href="/posts/2015/05/04/iso-simplify.html">Simplify a GeoJSON file in iso</a></h2>
   <p class="date">May 04, 2015</p>
   <p style="text-align: center"><img src="/img/iso1.gif" class="img-responsive"></p>
