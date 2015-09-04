@@ -78,6 +78,13 @@
   },
   {
     "id": 12,
+    "date": "2015/08/28",
+    "title": "HotPlate",
+    "file": "hotplate",
+    "published": true
+  },
+  {
+    "id": 13,
     "date": "2015/09/04",
     "title": "Creating a Dynamic Legend",
     "file": "dynamic-legend",
