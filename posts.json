@@ -89,5 +89,12 @@
     "title": "Creating a Dynamic Legend",
     "file": "dynamic-legend",
     "published": true
+  },
+  {
+    "id": 14,
+    "date": "2015/10/12",
+    "title": "3D Touch Map Zooming",
+    "file": "3d-touch",
+    "published": true
   }
 ]
