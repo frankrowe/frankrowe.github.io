@@ -18,6 +18,7 @@
   "homepage": "https://github.com/frankrowe/frankrowe.org",
   "dependencies": {
     "hbs": "^2.8.0",
+    "hover.css": "^2.0.2",
     "mkpath": "^0.1.0",
     "moment": "^2.9.0",
     "titlecase": "^1.0.2",
