@@ -103,5 +103,12 @@
     "title": "Tracking Mary Lee",
     "file": "marylee",
     "published": true
+  },
+  {
+    "id": 16,
+    "date": "2015/10/29",
+    "title": "More 3D Touch Experiments: Drawing a Buffer",
+    "file": "3dtouchbuffer",
+    "published": true
   }
 ]
