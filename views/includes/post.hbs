@@ -1,5 +1,9 @@
-<div class="post">
+<div id="{{id}}" class="post">
   <h2><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></h2>
-  <p class="date">{{ display_date }}</p>
+  <p class="date">{{ display_date }}
+    <span class="post-link">
+      <a href="/posts/{{ date }}/{{ file }}.html"><i class="fa fa-link"></i></a>
+    </span>
+  </p>
   {{{ content }}}
 </div>

@@ -103,7 +103,7 @@ ul.navigation li {
 }
 
 .marker:hover {
-  
+
 }
 
 .marker img {
@@ -136,8 +136,13 @@ ul.navigation li {
 }
 
 .post .date {
-  font-size: 12px;
-  color: #bbb;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.post-link {
+  color: #058145;
+  font-size: 16px;
 }
 
 table.archive {
