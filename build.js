@@ -5,11 +5,14 @@ var fs = require('fs')
   , moment = require('moment')
   , watch = require('watch')
   , toTitleCase = require('titlecase')
+  , _ = require('underscore')
 
 var page_dir = './views/pages/'
 var post_dir = './views/posts/'
+var tag_dir = './tag/'
 var header_template =  handlebars.compile(fs.readFileSync('views/includes/header.hbs', 'utf8'))
 var footer_template =  handlebars.compile(fs.readFileSync('views/includes/footer.hbs', 'utf8'))
+var tag_template =  handlebars.compile(fs.readFileSync('views/includes/tag.hbs', 'utf8'))
 var posts = require('./posts.json')
 var post_index = 1
 posts.forEach(function(post) {
@@ -20,6 +23,45 @@ posts.forEach(function(post) {
   }
 })
 posts.reverse()
+
+var tags = _.uniq(_.flatten(_.pluck(posts, 'tags')))
+var tagcounts = {}
+tags.forEach(function(tag) {
+  posts.forEach(function(post) {
+    if (post.tags.indexOf(tag) >=0) {
+      if (tagcounts[tag]) {
+        tagcounts[tag]++
+      } else {
+        tagcounts[tag] = 1
+      }
+    }
+  })
+})
+var alltags = []
+for (var key in tagcounts) {
+  alltags.push({
+    tag: key,
+    count: tagcounts[key]
+  })
+}
+alltags = _.sortBy(alltags, 'count').reverse()
+function renderTags() {
+  tags.forEach(function(tag) {
+    var p = []
+    posts.forEach(function(post) {
+      if (post.tags.indexOf(tag) >=0) {
+        p.push(post)
+      }
+    })
+    var tag_html = header_template({
+      title: '#' + tag + ' | frankrowe.org'
+    })
+    tag_html += tag_template({posts: p, tag: tag})
+    tag_html += footer_template()
+    var tag_path = tag_dir + tag + '.html'
+    fs.writeFile(tag_path, tag_html)
+  })
+}
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -45,6 +87,7 @@ function renderPages() {
 function renderPage(page_path, data) {
   var template =  handlebars.compile(fs.readFileSync(page_path, 'utf8'))
   data.filename = page_path
+  data.alltags = alltags
   var html = template(data)
   return html
 }
@@ -84,6 +127,7 @@ function renderPosts() {
   })
 }
 
+renderTags()
 renderPages()
 renderIndex()
 renderPosts()
@@ -99,6 +143,7 @@ watch.createMonitor('./views', opts, function (monitor) {
     idx++
     // Handle file changes
     console.log('rendering...', idx)
+    renderTags()
     renderPages()
     renderIndex()
     renderPosts()

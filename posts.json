@@ -4,111 +4,135 @@
     "date": "2014/07/23",
     "title": "A Programmer's Best Friends",
     "file": "programmers-best-friend",
-    "published": false
+    "published": false,
+    "tags": []
   },
   {
     "id": 2,
     "date": "2014/07/24",
     "title": "Map Rendering with TileMill and Amazon EC2",
     "file": "cloud-render",
-    "published": true
+    "published": true,
+    "tags": ["GIS"]
   },
   {
     "id": 3,
     "date": "2014/07/24",
     "title": "Documenting TileMill's project.mml",
     "file": "tilemill-project",
-    "published": false
+    "published": false,
+    "tags": []
   },
   {
     "id": 4,
     "date": "2014/07/24",
     "title": "Live Map Scales with D3.js",
     "file": "d3-map-scales",
-    "published": false
+    "published": false,
+    "tags": []
   },
   {
     "id": 5,
     "date": "2014/08/15",
     "title": "GeoDash",
     "file": "geodash",
-    "published": true
+    "published": true,
+    "tags": ["js", "dataviz", "opensource"]
   },
   {
     "id": 6,
     "date": "2014/12/02",
     "title": "Leaflet Crosshairs",
     "file": "leaflet-crosshairs",
-    "published": true
+    "published": true,
+    "tags": ["leaflet", "js", "opensource"]
   },
   {
     "id": 7,
     "date": "2014/12/04",
     "title": "Improved GeoDash Interaction",
     "file": "better-chart-hover",
-    "published": true
+    "published": true,
+    "tags": ["js", "dataviz", "opensource"]
   },
   {
     "id": 8,
     "date": "2015/01/17",
     "title": "Maryland in GeoJSON",
     "file": "maryland-geojson",
-    "published": true
+    "published": true,
+    "tags": ["GIS", "opensource"]
   },
   {
     "id": 9,
     "date": "2015/02/25",
     "title": "So Long",
     "file": "so-long",
-    "published": true
+    "published": true,
+    "tags": ["misc"]
   },
   {
     "id": 10,
     "date": "2015/03/17",
     "title": "PostGIS to Protobuf (with vector tiles)",
     "file": "postgis-to-protobuf",
-    "published": true
+    "published": true,
+    "tags": ["js", "GIS", "PostGIS"]
   },
   {
     "id": 11,
     "date": "2015/05/04",
     "title": "Simplify a GeoJSON file in iso",
     "file": "iso-simplify",
-    "published": true
+    "published": true,
+    "tags": ["js", "GIS"]
   },
   {
     "id": 12,
     "date": "2015/08/28",
     "title": "HotPlate",
     "file": "hotplate",
-    "published": true
+    "published": true,
+    "tags": ["misc"]
   },
   {
     "id": 13,
     "date": "2015/09/04",
     "title": "Creating a Dynamic Legend",
     "file": "dynamic-legend",
-    "published": true
+    "published": true,
+    "tags": ["js"]
   },
   {
     "id": 14,
     "date": "2015/10/12",
     "title": "3D Touch Map Zooming",
     "file": "3d-touch",
-    "published": true
+    "published": true,
+    "tags": ["js"]
   },
   {
     "id": 15,
     "date": "2015/10/15",
     "title": "Tracking Mary Lee",
     "file": "marylee",
-    "published": true
+    "published": true,
+    "tags": ["js", "map", "opendata", "opensource"]
   },
   {
     "id": 16,
     "date": "2015/10/29",
     "title": "More 3D Touch Experiments: Drawing a Buffer",
     "file": "3dtouchbuffer",
-    "published": true
+    "published": true,
+    "tags": ["js"]
+  },
+  {
+    "id": 17,
+    "date": "2015/12/07",
+    "title": "Salisbury Police Daily Calls Map",
+    "file": "spdcallsmap",
+    "published": true,
+    "tags": ["js", "map", "opendata", "opensource"]
   }
 ]

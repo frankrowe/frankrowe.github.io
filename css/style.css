@@ -145,6 +145,10 @@ ul.navigation li {
   font-size: 16px;
 }
 
+.post.archive {
+  border-bottom: none;
+}
+
 table.archive {
   width: 100%;
   color: rgb(81, 96, 102);

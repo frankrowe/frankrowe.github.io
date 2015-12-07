@@ -4,6 +4,11 @@
     <span class="post-link">
       <a href="/posts/{{ date }}/{{ file }}.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+      {{#each tags}}
+        <a href="/tag/{{.}}.html">#{{.}}</a>
+      {{/each}}
+    </span>
   </p>
   {{{ content }}}
 </div>

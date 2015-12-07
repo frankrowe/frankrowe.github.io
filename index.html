@@ -35,11 +35,34 @@
       </div>
     </div>
       <div class="row">
-        <div class="col-md-12"><div id="16" class="post">
+        <div class="col-md-12"><div id="17" class="post">
+  <h2><a href="/posts/2015/12/07/spdcallsmap.html">Salisbury Police Daily Calls Map</a></h2>
+  <p class="date">Dec 07, 2015
+    <span class="post-link">
+      <a href="/posts/2015/12/07/spdcallsmap.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/map.html">#map</a>
+        <a href="/tag/opendata.html">#opendata</a>
+        <a href="/tag/opensource.html">#opensource</a>
+    </span>
+  </p>
+  <iframe src="http://localityhq.com/sandbox/spdcallsmap/" style="border: none; width: 100%; height: 500px;"></iframe>
+<p>The Salisbury Police Department <a href="http://www.salisburypd.com/daily-calls-for-service.aspx">releases</a> daily reports on all calls for service. The report is in PDF form and includes an address. I wrote a program to download and parse these PDF reports automatically. The map has a calendar to select daily calls, and a list of selectable call types to filter the map.</p>
+<p>The code for the map and automatic download/parse is open source here: <a href="https://github.com/frankrowe/spdcallsmap">https://github.com/frankrowe/spdcallsmap</a>.</p>
+<p>The PDF reports are parsed into raw GeoJSON files, available here: <a href="https://github.com/frankrowe/spdcallsmap/tree/master/data">https://github.com/frankrowe/spdcallsmap/tree/master/data</a>.</p>
+<p>Full Screen Map: <a href="http://localityhq.com/sandbox/spdcallsmap/">http://localityhq.com/sandbox/spdcallsmap/</a>.</p>
+
+</div>
+<div id="16" class="post">
   <h2><a href="/posts/2015/10/29/3dtouchbuffer.html">More 3D Touch Experiments: Drawing a Buffer</a></h2>
   <p class="date">Oct 29, 2015
     <span class="post-link">
       <a href="/posts/2015/10/29/3dtouchbuffer.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
     </span>
   </p>
   <style>
@@ -85,18 +108,31 @@
     <span class="post-link">
       <a href="/posts/2015/10/15/marylee.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/map.html">#map</a>
+        <a href="/tag/opendata.html">#opendata</a>
+        <a href="/tag/opensource.html">#opensource</a>
+    </span>
   </p>
-  <iframe src="http://frankrowe.org/marylee/" style="border: none; width: 100%; height: 500px;"></iframe> 
+  <iframe src="http://frankrowe.org/marylee/" style="border: none; width: 100%; height: 500px;"></iframe>
 <p><a href="http://www.ocearch.org/profile/mary_lee/">Mary Lee</a> is a 3,456 pound Great White that is tracked by the <a href="http://www.ocearch.org/">OCEARCH</a> team, and often approaches the shores of my hometown Ocean City, MD.</p>
 <p>You can view her route over the last three years on ocearch.org, but I wanted to see how she traveled that path, from one ping to the next.</p>
 <p>It's also interesting to use Esri's <a href="http://server.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer">World Ocean Base</a> as a base map to see when she moves into shallow and deep waters, and travels along ocean ridges.</p>
 <p>Mary Lee's pings are always available from OCEARCH via a somewhat hidden <a href="http://www.ocearch.org/tracker/ajax/filter-sharks/?sharks%5B%5D=41&tracking-activity=+&gender=+&stage-of-life=+&location=0">API</a>.</p>
+<p>
+  The code to download, format, and display this data is <a href="https://github.com/frankrowe/marylee">open source</a>.  
+</p>
+
 </div>
 <div id="14" class="post">
   <h2><a href="/posts/2015/10/12/3d-touch.html">3D Touch Map Zooming</a></h2>
   <p class="date">Oct 12, 2015
     <span class="post-link">
       <a href="/posts/2015/10/12/3d-touch.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
     </span>
   </p>
   <p class="text-center"><img src="/img/3dtouchmap.gif" class="img-responsive"></p>
@@ -120,6 +156,9 @@
   <p class="date">Sep 04, 2015
     <span class="post-link">
       <a href="/posts/2015/09/04/dynamic-legend.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
     </span>
   </p>
   <p>
@@ -169,6 +208,9 @@ union
     <span class="post-link">
       <a href="/posts/2015/08/28/hotplate.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+        <a href="/tag/misc.html">#misc</a>
+    </span>
   </p>
   <p class="text-center"><img src="/img/hotplate.png" class="img-responsive"></p>
 <p><a href="http://hotplate.io/">HotPlate</a> is a platform to leave messages for license plates.</p>
@@ -187,6 +229,10 @@ union
     <span class="post-link">
       <a href="/posts/2015/05/04/iso-simplify.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/GIS.html">#GIS</a>
+    </span>
   </p>
   <p style="text-align: center"><img src="/img/iso1.gif" class="img-responsive"></p>
 <p>Open a .geojson file in iso, select the feature you want to edit, and choose Feature > Transformation > Simplify. Input your simplification tolerance, and hit OK. You can then save your layer as a new geojson file.</p>
@@ -199,6 +245,11 @@ union
   <p class="date">Mar 17, 2015
     <span class="post-link">
       <a href="/posts/2015/03/17/postgis-to-protobuf.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/GIS.html">#GIS</a>
+        <a href="/tag/PostGIS.html">#PostGIS</a>
     </span>
   </p>
   <p style="text-align: center"><img src="/img/vector-tiles.jpg" class="img-responsive"></p>
@@ -252,6 +303,9 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
     <span class="post-link">
       <a href="/posts/2015/02/25/so-long.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+        <a href="/tag/misc.html">#misc</a>
+    </span>
   </p>
   <p style="text-align: center"><img src="/img/so-long.png" class="img-responsive"></p>
 <p>Today I pushed to master on <a href="http://esrgc.org">esrgc.org</a>, removing myself from the About page. It ends a five year long journey at the co-op. I learned so much in my time there, about programming and life in general. It was the perfect place to begin my career.</p>
@@ -262,6 +316,10 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
   <p class="date">Jan 17, 2015
     <span class="post-link">
       <a href="/posts/2015/01/17/maryland-geojson.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/GIS.html">#GIS</a>
+        <a href="/tag/opensource.html">#opensource</a>
     </span>
   </p>
   <p style="text-align: center"><img src="/img/maryland-geojson.png" class="img-responsive"></p>
@@ -274,6 +332,11 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
     <span class="post-link">
       <a href="/posts/2014/12/04/better-chart-hover.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/dataviz.html">#dataviz</a>
+        <a href="/tag/opensource.html">#opensource</a>
+    </span>
   </p>
   <p class="text-center"><img src="/img/geodash-hover.png" class="img-responsive"></p>
 <p>Hovering points on line charts was becoming harder and harder as data size increased and point radius decreased. Solution? Bigger mouse targets on top of data points. Reduce target opacity to zero and find the matching data point on mouse over, and bam - much better interactivity.</p>
@@ -284,6 +347,11 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
   <p class="date">Dec 02, 2014
     <span class="post-link">
       <a href="/posts/2014/12/02/leaflet-crosshairs.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/leaflet.html">#leaflet</a>
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/opensource.html">#opensource</a>
     </span>
   </p>
   <p><img src="/img/leaflet-crosshairs.jpeg" class="img-responsive"></p>
@@ -298,6 +366,11 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
     <span class="post-link">
       <a href="/posts/2014/08/15/geodash.html"><i class="fa fa-link"></i></a>
     </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/dataviz.html">#dataviz</a>
+        <a href="/tag/opensource.html">#opensource</a>
+    </span>
   </p>
   <p class="text-center"><img src="/img/geodash.png" class="img-responsive"></p>
 <p>GeoDash is a minimal javascript chart library. It's built on <a href="http://d3js.org">D3</a> and supports horizontal and vertical bar charts, stacked bar charts, pie charts and line charts.</p>
@@ -309,6 +382,9 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
   <p class="date">Jul 24, 2014
     <span class="post-link">
       <a href="/posts/2014/07/24/cloud-render.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/GIS.html">#GIS</a>
     </span>
   </p>
   <p><img src="/img/denver.jpeg" class="img-responsive"></p>
