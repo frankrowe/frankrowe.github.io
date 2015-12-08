@@ -1,5 +1,4 @@
 frankrowe.org
 =============
 
-My personal website
-
+My personal website + blog

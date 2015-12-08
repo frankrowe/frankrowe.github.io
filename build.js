@@ -3,48 +3,58 @@ var fs = require('fs')
   , mkpath = require('mkpath')
   , handlebars = require('hbs').handlebars
   , moment = require('moment')
-  , watch = require('watch')
+  , chokidar = require('chokidar')
   , toTitleCase = require('titlecase')
   , _ = require('underscore')
 
 var page_dir = './views/pages/'
-var post_dir = './views/posts/'
-var tag_dir = './tag/'
-var header_template =  handlebars.compile(fs.readFileSync('views/includes/header.hbs', 'utf8'))
-var footer_template =  handlebars.compile(fs.readFileSync('views/includes/footer.hbs', 'utf8'))
-var tag_template =  handlebars.compile(fs.readFileSync('views/includes/tag.hbs', 'utf8'))
-var posts = require('./posts.json')
-var post_index = 1
-posts.forEach(function(post) {
-  post.display_date = moment(post.date, 'YYYY/MM/DD').format('MMM DD, YYYY')
-  if (post.published) {
-    post.post_index = post_index
-    post_index++
-  }
-})
-posts.reverse()
+  , post_dir = './views/posts/'
+  , tag_dir = './tag/'
 
-var tags = _.uniq(_.flatten(_.pluck(posts, 'tags')))
-var tagcounts = {}
-tags.forEach(function(tag) {
+var header_template =  handlebars.compile(fs.readFileSync('views/includes/header.hbs', 'utf8'))
+  , footer_template =  handlebars.compile(fs.readFileSync('views/includes/footer.hbs', 'utf8'))
+  , tag_template =  handlebars.compile(fs.readFileSync('views/includes/tag.hbs', 'utf8'))
+
+var posts, tags, alltags
+
+function getPosts() {
+  posts = JSON.parse(fs.readFileSync('./posts.json'))
+  var post_index = 1
   posts.forEach(function(post) {
-    if (post.tags.indexOf(tag) >=0) {
-      if (tagcounts[tag]) {
-        tagcounts[tag]++
-      } else {
-        tagcounts[tag] = 1
-      }
+    post.display_date = moment(post.date, 'YYYY/MM/DD').format('MMM DD, YYYY')
+    if (post.published) {
+      post.post_index = post_index
+      post_index++
     }
   })
-})
-var alltags = []
-for (var key in tagcounts) {
-  alltags.push({
-    tag: key,
-    count: tagcounts[key]
-  })
+  posts.reverse()
+  getTags()
 }
-alltags = _.sortBy(alltags, 'count').reverse()
+
+function getTags() {
+  tags = _.uniq(_.flatten(_.pluck(posts, 'tags')))
+  var tagcounts = {}
+  tags.forEach(function(tag) {
+    posts.forEach(function(post) {
+      if (post.tags.indexOf(tag) >=0) {
+        if (tagcounts[tag]) {
+          tagcounts[tag]++
+        } else {
+          tagcounts[tag] = 1
+        }
+      }
+    })
+  })
+  alltags = []
+  for (var key in tagcounts) {
+    alltags.push({
+      tag: key,
+      count: tagcounts[key]
+    })
+  }
+  alltags = _.sortBy(alltags, 'count').reverse()
+}
+
 function renderTags() {
   tags.forEach(function(tag) {
     var p = []
@@ -127,25 +137,20 @@ function renderPosts() {
   })
 }
 
-renderTags()
-renderPages()
-renderIndex()
-renderPosts()
-
-console.log('watching...')
-var opts = {
-  ignoreDotFiles: true,
-  ignoreDirectoryPattern: /node_modules/
+function build(path) {
+  console.log('build')
+  getPosts()
+  renderTags()
+  renderPages()
+  renderIndex()
+  renderPosts()
 }
-var idx = 0
-watch.createMonitor('./views', opts, function (monitor) {
-  monitor.on("changed", function (f, curr, prev) {
-    idx++
-    // Handle file changes
-    console.log('rendering...', idx)
-    renderTags()
-    renderPages()
-    renderIndex()
-    renderPosts()
-  })
+
+var watcher = chokidar.watch(['./views', './posts.json'], {
+  ignored: /[\/\\]\./,
+  persistent: true
 })
+
+watcher.on('change', build)
+watcher.on('add', build)
+build()

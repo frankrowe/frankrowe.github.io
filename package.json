@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/frankrowe/frankrowe.org",
   "dependencies": {
+    "chokidar": "^1.4.0",
     "hbs": "^2.8.0",
     "hover.css": "^2.0.2",
     "mkpath": "^0.1.0",
     "moment": "^2.9.0",
     "titlecase": "^1.0.2",
-    "underscore": "^1.8.3",
-    "watch": "^0.14.0"
+    "underscore": "^1.8.3"
   }
 }
