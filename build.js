@@ -4,16 +4,15 @@ var fs = require('fs')
   , handlebars = require('hbs').handlebars
   , moment = require('moment')
   , chokidar = require('chokidar')
-  , toTitleCase = require('titlecase')
   , _ = require('underscore')
 
-var page_dir = './views/pages/'
-  , post_dir = './views/posts/'
+var page_dir = './templates/pages/'
+  , post_dir = './templates/posts/'
   , tag_dir = './tag/'
 
-var header_template =  handlebars.compile(fs.readFileSync('views/includes/header.hbs', 'utf8'))
-  , footer_template =  handlebars.compile(fs.readFileSync('views/includes/footer.hbs', 'utf8'))
-  , tag_template =  handlebars.compile(fs.readFileSync('views/includes/tag.hbs', 'utf8'))
+var header_template =  handlebars.compile(fs.readFileSync('templates/includes/header.hbs', 'utf8'))
+  , footer_template =  handlebars.compile(fs.readFileSync('templates/includes/footer.hbs', 'utf8'))
+  , tag_template =  handlebars.compile(fs.readFileSync('templates/includes/tag.hbs', 'utf8'))
 
 var posts, tags, alltags
 
@@ -117,12 +116,11 @@ function renderIndex() {
 
 function renderPost(post) {
   post.content = fs.readFileSync(path.join(post_dir, post.file + '.hbs'), 'utf8')
-  return renderPage('views/includes/post.hbs', post)
+  return renderPage('templates/includes/post.hbs', post)
 }
 
 function renderPosts() {
   posts.forEach(function(post) {
-    //post.title = toTitleCase(post.title)
     if (post.published) {
       var html = header_template({
         title: post.title + ' | frankrowe.org'
@@ -146,11 +144,10 @@ function build(path) {
   renderPosts()
 }
 
-var watcher = chokidar.watch(['./views', './posts.json'], {
+var watcher = chokidar.watch(['./templates', './posts.json'], {
   ignored: /[\/\\]\./,
   persistent: true
 })
 
 watcher.on('change', build)
-watcher.on('add', build)
 build()
