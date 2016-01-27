@@ -151,7 +151,7 @@ function makeXMLFeed() {
       date: moment(post.date, 'YYYY/MM/DD')
     })
   })
-  var xml = feed.xml({indent: true})
+  var xml = feed.xml()
   fs.writeFile('./rss.xml', xml)
 }
 
