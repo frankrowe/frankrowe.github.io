@@ -5,6 +5,7 @@ var fs = require('fs')
   , moment = require('moment')
   , chokidar = require('chokidar')
   , _ = require('underscore')
+  , RSS = require('rss')
 
 var page_dir = './templates/pages/'
   , post_dir = './templates/posts/'
@@ -135,6 +136,25 @@ function renderPosts() {
   })
 }
 
+function makeXMLFeed() {
+  var feed = new RSS({
+    title: 'frankrowe.org',
+    site_url: 'http://frankrowe.org',
+    description: 'The personal blog of Frank Rowe, an independent web and GIS developer located on the Eastern Shore of Maryland.'
+  })
+  _.first(posts, 5).forEach(function(post) {
+    feed.item({
+      title: post.title,
+      description: post.description,
+      url: 'http://frankrowe.org/posts/' + post.date + '/' + post.file + '.html',
+      guid: post.id,
+      date: moment(post.date, 'YYYY/MM/DD')
+    })
+  })
+  var xml = feed.xml({indent: true})
+  fs.writeFile('./rss.xml', xml)
+}
+
 function build(path) {
   console.log('build')
   getPosts()
@@ -142,6 +162,7 @@ function build(path) {
   renderPages()
   renderIndex()
   renderPosts()
+  makeXMLFeed()
 }
 
 var watcher = chokidar.watch(['./templates', './posts.json'], {

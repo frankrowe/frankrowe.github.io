@@ -5,7 +5,8 @@
     "title": "A Programmer's Best Friends",
     "file": "programmers-best-friend",
     "published": false,
-    "tags": []
+    "tags": [],
+    "description": ""
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "title": "Map Rendering with TileMill and Amazon EC2",
     "file": "cloud-render",
     "published": true,
-    "tags": ["GIS"]
+    "tags": ["GIS"],
+    "description": ""
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "title": "Documenting TileMill's project.mml",
     "file": "tilemill-project",
     "published": false,
-    "tags": []
+    "tags": [],
+    "description": ""
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "title": "Live Map Scales with D3.js",
     "file": "d3-map-scales",
     "published": false,
-    "tags": []
+    "tags": [],
+    "description": ""
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "title": "GeoDash",
     "file": "geodash",
     "published": true,
-    "tags": ["js", "dataviz", "opensource"]
+    "tags": ["js", "dataviz", "opensource"],
+    "description": ""
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "title": "Leaflet Crosshairs",
     "file": "leaflet-crosshairs",
     "published": true,
-    "tags": ["leaflet", "js", "opensource"]
+    "tags": ["leaflet", "js", "opensource"],
+    "description": ""
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "title": "Improved GeoDash Interaction",
     "file": "better-chart-hover",
     "published": true,
-    "tags": ["js", "dataviz", "opensource"]
+    "tags": ["js", "dataviz", "opensource"],
+    "description": ""
   },
   {
     "id": 8,
@@ -61,7 +68,8 @@
     "title": "Maryland in GeoJSON",
     "file": "maryland-geojson",
     "published": true,
-    "tags": ["GIS", "opensource"]
+    "tags": ["GIS", "opensource"],
+    "description": ""
   },
   {
     "id": 9,
@@ -69,7 +77,8 @@
     "title": "So Long",
     "file": "so-long",
     "published": true,
-    "tags": ["misc"]
+    "tags": ["misc"],
+    "description": ""
   },
   {
     "id": 10,
@@ -77,7 +86,8 @@
     "title": "PostGIS to Protobuf (with vector tiles)",
     "file": "postgis-to-protobuf",
     "published": true,
-    "tags": ["js", "GIS", "PostGIS"]
+    "tags": ["js", "GIS", "PostGIS"],
+    "description": ""
   },
   {
     "id": 11,
@@ -85,7 +95,8 @@
     "title": "Simplify a GeoJSON file in iso",
     "file": "iso-simplify",
     "published": true,
-    "tags": ["js", "GIS"]
+    "tags": ["js", "GIS"],
+    "description": ""
   },
   {
     "id": 12,
@@ -93,7 +104,8 @@
     "title": "HotPlate",
     "file": "hotplate",
     "published": true,
-    "tags": ["misc"]
+    "tags": ["misc"],
+    "description": ""
   },
   {
     "id": 13,
@@ -101,7 +113,8 @@
     "title": "Creating a Dynamic Legend",
     "file": "dynamic-legend",
     "published": true,
-    "tags": ["js"]
+    "tags": ["js"],
+    "description": "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>"
   },
   {
     "id": 14,
@@ -109,7 +122,8 @@
     "title": "3D Touch Map Zooming",
     "file": "3d-touch",
     "published": true,
-    "tags": ["js"]
+    "tags": ["js"],
+    "description": "<p>How to zoom a web map using 3D Touch APIs in JavaScript.</p>"
   },
   {
     "id": 15,
@@ -117,7 +131,8 @@
     "title": "Tracking Mary Lee",
     "file": "marylee",
     "published": true,
-    "tags": ["js", "map", "opendata", "opensource"]
+    "tags": ["js", "map", "opendata", "opensource"],
+    "description": "<p>A quick map showing the track of the great white shark Mary Lee.</p>"
   },
   {
     "id": 16,
@@ -125,7 +140,8 @@
     "title": "More 3D Touch Experiments: Drawing a Buffer",
     "file": "3dtouchbuffer",
     "published": true,
-    "tags": ["js"]
+    "tags": ["js"],
+    "description": "<p>Drawing a buffered area on a web map using 3D Touch APIs in JavaScript.</p>"
   },
   {
     "id": 17,
@@ -133,6 +149,7 @@
     "title": "Salisbury Police Daily Calls Map",
     "file": "spdcallsmap",
     "published": true,
-    "tags": ["js", "map", "opendata", "opensource"]
+    "tags": ["js", "map", "opendata", "opensource"],
+    "description": "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
   }
 ]
