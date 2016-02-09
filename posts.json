@@ -155,7 +155,7 @@
   {
     "id": 18,
     "date": "2016/02/09",
-    "title": "location-bar: Display GPS in your menu bar",
+    "title": "location-bar: GPS coordinates in your menu bar",
     "file": "location-bar",
     "published": true,
     "tags": ["os x", "gis", "opensource"],
