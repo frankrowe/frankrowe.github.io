@@ -136,7 +136,7 @@ function renderPosts() {
   })
 }
 
-function makeXMLFeed() {
+function makeRSSFeed() {
   var feed = new RSS({
     title: 'frankrowe.org',
     site_url: 'http://frankrowe.org',
@@ -162,7 +162,7 @@ function build(path) {
   renderPages()
   renderIndex()
   renderPosts()
-  makeXMLFeed()
+  makeRSSFeed()
 }
 
 var watcher = chokidar.watch(['./templates', './posts.json'], {
