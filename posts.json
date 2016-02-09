@@ -151,5 +151,14 @@
     "published": true,
     "tags": ["js", "map", "opendata", "opensource"],
     "description": "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
+  },
+  {
+    "id": 18,
+    "date": "2016/02/09",
+    "title": "location-bar: Display GPS in your menu bar",
+    "file": "location-bar",
+    "published": true,
+    "tags": ["os x", "gis", "opensource"],
+    "description": "<p>Display your current GPS coordinates in your OS X menu bar.</p>"
   }
 ]
