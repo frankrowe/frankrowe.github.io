@@ -37,6 +37,32 @@
     </div>
       <div class="row">
         <div class="col-md-12">
+<div id="19" class="post">
+  <h2><a href="/posts/2016/03/01/build-scripts.html">npm-scripts &gt; grunt</a></h2>
+  <p class="date">Mar 01, 2016
+    <span class="post-link">
+      <a href="/posts/2016/03/01/build-scripts.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/css.html">#css</a>
+        <a href="/tag/dev.html">#dev</a>
+    </span>
+  </p>
+  <pre style="font-size: 11px;"><code class="js">"scripts": {
+  "watch-css": "onchange 'style/*.less' -- npm run build-css",
+  "watch-js": "watchify -t [ babelify --presets [ es2015 react ] ] js/*.jsx js/*.js -o dist/bundle.js -dv",
+  "watch": "npm run watch-css & npm run watch-js",
+  "build-css": "lessc --autoprefix='last 2 versions' style/main.less dist/style.css",
+  "build-js": "browserify -t [ babelify --presets [ es2015 react ] ] js/*.jsx js/*.js -o dist/bundle.js",
+  "build": "npm run build-css && npm run build-js"
+}</code></pre>
+<p>Reasons: simpler, less stuff to install, fewer files in your root, simpler, no plugins, same functionality, simpler.</p>
+<p>Not only do you not need to install/maintain/update grunt, you don't need any of the grunt plugins. Instead of installing and updating grunt-browserify, grunt-less, etc, you just install the actual browserify package. You've just cut your dependencies in half.</p>
+<p>Above is an example of what I use for a project with React, ES2015, and Less. I use <a href="https://github.com/substack/node-browserify">browserify</a> with a <a href="https://github.com/babel/babelify">babelify</a> transform to package my js + jsx modules, and <a href="https://github.com/substack/watchify">watchify</a> to do the same on file changes. I use <a href="https://github.com/less/less.js">less</a> to compile css from my main.less file, from which I import all other less files. <a href="https://github.com/Qard/onchange">onchange</a> enables us to watch for changes in your less files. You can then run <code>npm run build</code> to build your css/js, and <code>npm run watch</code> to recompile on changes during development.</p>
+<p><a href="https://docs.npmjs.com/misc/scripts">npm-scripts</a> has lots of nice built in scripts and pre and post hooks that you can take advantage of. Bottom line, it's better to take advantage of your already existing package.json than add an entire new dependency to your project.</p>
+
+</div>
 <div id="18" class="post">
   <h2><a href="/posts/2016/02/09/location-bar.html">location-bar: GPS coordinates in your menu bar</a></h2>
   <p class="date">Feb 09, 2016

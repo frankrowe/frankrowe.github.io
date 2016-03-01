@@ -160,5 +160,14 @@
     "published": true,
     "tags": ["os x", "gis", "opensource"],
     "description": "<p>Display your current GPS coordinates in your OS X menu bar.</p>"
+  },
+  {
+    "id": 19,
+    "date": "2016/03/01",
+    "title": "npm-scripts > grunt",
+    "file": "build-scripts",
+    "published": true,
+    "tags": ["js", "css", "dev"],
+    "description": "<p>Why npm-scripts is better than grunt/gulp for running build scripts.</p>"
   }
 ]
