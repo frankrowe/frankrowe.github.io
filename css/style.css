@@ -259,3 +259,14 @@ td {
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
 }
+
+.footer {
+  text-align: center;
+  padding-top: 40px;
+  font-size: 12px;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 18px;
+}
