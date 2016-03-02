@@ -4,7 +4,6 @@ var fs = require('fs')
   , mkpath = require('mkpath')
   , handlebars = require('hbs').handlebars
   , moment = require('moment')
-  , chokidar = require('chokidar')
   , _ = require('underscore')
   , RSS = require('rss')
 
@@ -178,10 +177,4 @@ function build(path) {
   return
 }
 
-// var watcher = chokidar.watch(['./templates', './posts.json'], {
-//   ignored: /[\/\\]\./,
-//   persistent: true
-// })
-
-//watcher.on('change', build)
 build()

@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/frankrowe/frankrowe.org",
   "dependencies": {
-    "chokidar": "^1.4.0",
     "hbs": "^2.8.0",
     "hover.css": "^2.0.2",
     "mkpath": "^0.1.0",
