@@ -175,12 +175,13 @@ function build(path) {
   renderPosts()
   makeRSSFeed()
   console.log('done')
+  return
 }
 
-var watcher = chokidar.watch(['./templates', './posts.json'], {
-  ignored: /[\/\\]\./,
-  persistent: true
-})
+// var watcher = chokidar.watch(['./templates', './posts.json'], {
+//   ignored: /[\/\\]\./,
+//   persistent: true
+// })
 
 //watcher.on('change', build)
 build()
