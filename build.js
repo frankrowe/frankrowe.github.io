@@ -182,5 +182,5 @@ var watcher = chokidar.watch(['./templates', './posts.json'], {
   persistent: true
 })
 
-watcher.on('change', build)
+//watcher.on('change', build)
 build()
