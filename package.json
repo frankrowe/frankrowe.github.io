@@ -1,12 +1,13 @@
 {
   "name": "frankrowe.org",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "frankrowe.org =============",
   "main": "index.js",
   "scripts": {
     "prebuild": "npm --no-git-tag-version version patch",
     "build": "node ./build.js",
-    "postbuild": "git add . && git commit -m \"build\""
+    "postbuild": "git add . && git commit -m \"build\"",
+    "watch": "onchange './templates' './posts.json' -- npm run build"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "hover.css": "^2.0.2",
     "mkpath": "^0.1.0",
     "moment": "^2.9.0",
+    "onchange": "^2.0.0",
     "rss": "^1.2.1",
     "titlecase": "^1.0.2",
     "underscore": "^1.8.3"
