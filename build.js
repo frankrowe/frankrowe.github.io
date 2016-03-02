@@ -164,7 +164,6 @@ function makeRSSFeed() {
 
 function build(path) {
   console.log('build')
-  bump()
   getTemplates()
   getPosts()
   renderTags()
