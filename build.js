@@ -11,11 +11,13 @@ var page_dir = './templates/pages/'
   , post_dir = './templates/posts/'
   , tag_dir = './tag/'
 
-var header_template =  handlebars.compile(fs.readFileSync('templates/includes/header.hbs', 'utf8'))
-  , footer_template =  handlebars.compile(fs.readFileSync('templates/includes/footer.hbs', 'utf8'))
-  , tag_template =  handlebars.compile(fs.readFileSync('templates/includes/tag.hbs', 'utf8'))
+var posts, tags, alltags, header_template, footer_template, tag_template
 
-var posts, tags, alltags
+function getTemplates() {
+  header_template =  handlebars.compile(fs.readFileSync('templates/includes/header.hbs', 'utf8'))
+  footer_template =  handlebars.compile(fs.readFileSync('templates/includes/footer.hbs', 'utf8'))
+  tag_template =  handlebars.compile(fs.readFileSync('templates/includes/tag.hbs', 'utf8'))
+}
 
 function getPosts() {
   posts = JSON.parse(fs.readFileSync('./posts.json'))
@@ -157,12 +159,14 @@ function makeRSSFeed() {
 
 function build(path) {
   console.log('build')
+  getTemplates()
   getPosts()
   renderTags()
   renderPages()
   renderIndex()
   renderPosts()
   makeRSSFeed()
+  console.log('done')
 }
 
 var watcher = chokidar.watch(['./templates', './posts.json'], {
