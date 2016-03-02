@@ -1,5 +1,6 @@
 var fs = require('fs')
   , path = require('path')
+  , exec = require('child_process').exec
   , mkpath = require('mkpath')
   , handlebars = require('hbs').handlebars
   , moment = require('moment')
@@ -157,8 +158,15 @@ function makeRSSFeed() {
   fs.writeFile('./rss.xml', xml)
 }
 
+function bump() {
+  exec('git add . && npm version patch -m "build"', function(error, stdout, stderr) {
+    console.log(error, stdout, stderr);
+  });
+}
+
 function build(path) {
   console.log('build')
+  bump()
   getTemplates()
   getPosts()
   renderTags()
