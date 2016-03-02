@@ -162,12 +162,6 @@ function makeRSSFeed() {
   fs.writeFile('./rss.xml', xml)
 }
 
-function bump() {
-  // exec('git add . && git commit -m "build"', function(error, stdout, stderr) {
-  //   console.log(error, stdout, stderr);
-  // });
-}
-
 function build(path) {
   console.log('build')
   bump()
