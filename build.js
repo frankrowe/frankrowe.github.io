@@ -159,7 +159,7 @@ function makeRSSFeed() {
 }
 
 function bump() {
-  exec('git add . && npm version patch -m "build"', function(error, stdout, stderr) {
+  exec('git add . && git commit -m "build" && npm version patch', function(error, stdout, stderr) {
     console.log(error, stdout, stderr);
   });
 }
