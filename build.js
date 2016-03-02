@@ -6,12 +6,17 @@ var fs = require('fs')
   , moment = require('moment')
   , _ = require('underscore')
   , RSS = require('rss')
+  , pkg = require('./package.json')
 
 var page_dir = './templates/pages/'
   , post_dir = './templates/posts/'
   , tag_dir = './tag/'
 
 var posts, tags, alltags, header_template, footer_template, tag_template
+
+handlebars.registerHelper('version', function(block) {
+  return pkg.version
+})
 
 function getTemplates() {
   header_template =  handlebars.compile(fs.readFileSync('templates/includes/header.hbs', 'utf8'))
