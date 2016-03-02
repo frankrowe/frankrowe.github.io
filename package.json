@@ -1,10 +1,12 @@
 {
   "name": "frankrowe.org",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "frankrowe.org =============",
   "main": "index.js",
   "scripts": {
-    "build": "git add . && git commit -m \"build\" && npm version patch && node ./build.js"
+    "prebuild": "npm --no-git-tag-version version patch",
+    "build": "node ./build.js",
+    "postbuild": "git add . && git commit -m \"build\""
   },
   "repository": {
     "type": "git",
