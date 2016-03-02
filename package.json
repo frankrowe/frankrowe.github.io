@@ -4,7 +4,10 @@
   "description": "frankrowe.org =============",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preversion": "npm test",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags && rm -rf build/temp",
+    "build": "git add . && git commit -m \"build\" && npm version patch && node ./build.js"
   },
   "repository": {
     "type": "git",
