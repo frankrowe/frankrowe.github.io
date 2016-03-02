@@ -164,7 +164,7 @@
   {
     "id": 19,
     "date": "2016/03/01",
-    "title": "npm-scripts > grunt test",
+    "title": "npm-scripts > grunt",
     "file": "build-scripts",
     "published": true,
     "tags": ["js", "css", "dev"],
