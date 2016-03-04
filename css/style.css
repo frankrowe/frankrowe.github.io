@@ -5,8 +5,8 @@ html, body {
 
 body {
   color: rgb(81, 96, 102);
-  font-size: 14px;
-  font-family: 'Oxygen', sans-serif;
+  font-size: 16px;
+  font-family: "museo-sans", sans-serif;
   font-weight: 300;
   background: #ffffff;
 }
@@ -32,6 +32,10 @@ a {
 
 p > a {
   background: #fffff0;
+}
+
+h2 {
+  
 }
 
 a:hover {
@@ -88,9 +92,13 @@ header a {
   float: right;
   list-style: none;
   margin-bottom: 0px;
-  width: 100%;
   padding: 0 0 0 20px;
   text-align: right;
+}
+
+.contact-bar .title {
+  float: left;
+  padding-left: 30px;
 }
 
 ul.navigation li {
@@ -100,6 +108,7 @@ ul.navigation li {
 
 .marker {
   position: absolute;
+  top: 15px;
 }
 
 .marker:hover {
@@ -123,7 +132,9 @@ ul.navigation li {
 }
 
 .post h2 {
-  margin-bottom: 0px;
+  border-bottom: 2px solid #333;
+  font-weight: 300;
+  display: inline-block;
 }
 
 .post h2 a {
