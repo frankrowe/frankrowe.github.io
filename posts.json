@@ -169,5 +169,14 @@
     "published": true,
     "tags": ["js", "css", "dev"],
     "description": "<p>Why npm-scripts is better than grunt/gulp for running build scripts.</p>"
+  },
+  {
+    "id": 20,
+    "date": "2016/03/04",
+    "title": "A new take on QGIS icons",
+    "file": "qgis-icons",
+    "published": true,
+    "tags": ["js", "css", "dev"],
+    "description": "<p>A new take on QGIS icons</p>"
   }
 ]
