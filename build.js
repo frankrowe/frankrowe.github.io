@@ -1,178 +1,171 @@
-var fs = require('fs')
-  , path = require('path')
-  , exec = require('child_process').exec
-  , mkpath = require('mkpath')
-  , handlebars = require('hbs').handlebars
-  , moment = require('moment')
-  , _ = require('underscore')
-  , RSS = require('rss')
-  , pkg = require('./package.json')
+import fs from 'fs';
+import path from 'path';
+import { exec } from 'child_process';
+import mkpath from 'mkpath';
+import { handlebars } from 'hbs';
+import moment from 'moment';
+import _ from 'underscore';
+import RSS from 'rss';
+import pkg from './package.json';
+import posts from './posts.json';
 
-var page_dir = './templates/pages/'
-  , post_dir = './templates/posts/'
-  , tag_dir = './tag/'
+const page_dir = './templates/pages/';
+const post_dir = './templates/posts/';
+const tag_dir = './tag/';
+const header_template =  handlebars.compile(fs.readFileSync('templates/includes/header.hbs', 'utf8'));
+const footer_template =  handlebars.compile(fs.readFileSync('templates/includes/footer.hbs', 'utf8'));
+const tag_template =  handlebars.compile(fs.readFileSync('templates/includes/tag.hbs', 'utf8'));
 
-var posts, tags, alltags, header_template, footer_template, tag_template
+let tags = [];
+let alltags = [];
 
-handlebars.registerHelper('version', function(block) {
-  return pkg.version
-})
-
-function getTemplates() {
-  header_template =  handlebars.compile(fs.readFileSync('templates/includes/header.hbs', 'utf8'))
-  footer_template =  handlebars.compile(fs.readFileSync('templates/includes/footer.hbs', 'utf8'))
-  tag_template =  handlebars.compile(fs.readFileSync('templates/includes/tag.hbs', 'utf8'))
-}
+handlebars.registerHelper('version', (block) => {
+  return pkg.version;
+});
 
 function getPosts() {
-  posts = JSON.parse(fs.readFileSync('./posts.json'))
-  var post_index = 1
-  posts.forEach(function(post) {
-    post.display_date = moment(post.date, 'YYYY/MM/DD').format('MMM DD, YYYY')
+  var post_index = 1;
+  posts.forEach((post) => {
+    post.display_date = moment(post.date, 'YYYY/MM/DD').format('MMM DD, YYYY');
     if (post.published) {
-      post.post_index = post_index
-      post_index++
+      post.post_index = post_index;
+      post_index++;
     }
-  })
-  posts.reverse()
-  getTags()
+  });
+  posts.reverse();
 }
 
 function getTags() {
-  tags = _.uniq(_.flatten(_.pluck(posts, 'tags')))
-  var tagcounts = {}
-  tags.forEach(function(tag) {
-    posts.forEach(function(post) {
+  tags = _.uniq(_.flatten(_.pluck(posts, 'tags')));
+  let tagcounts = {};
+  tags.forEach((tag) => {
+    posts.forEach((post) => {
       if (post.tags.indexOf(tag) >=0) {
         if (tagcounts[tag]) {
-          tagcounts[tag]++
+          tagcounts[tag]++;
         } else {
-          tagcounts[tag] = 1
+          tagcounts[tag] = 1;
         }
       }
-    })
-  })
-  alltags = []
+    });
+  });
   for (var key in tagcounts) {
     alltags.push({
       tag: key,
       count: tagcounts[key]
-    })
+    });
   }
-  alltags = _.sortBy(alltags, 'count').reverse()
+  alltags = _.sortBy(alltags, 'count').reverse();
 }
 
 function renderTags() {
-  tags.forEach(function(tag) {
-    var p = []
-    posts.forEach(function(post) {
-      if (post.tags.indexOf(tag) >=0) {
-        p.push(post)
-      }
-    })
-    var tag_html = header_template({
+  tags.forEach((tag) => {
+    let taggedPosts = posts.filter((post) => {
+      return post.tags.indexOf(tag) >=0
+    });
+    let tag_html = header_template({
       title: '#' + tag + ' | frankrowe.org'
-    })
-    tag_html += tag_template({posts: p, tag: tag})
-    tag_html += footer_template()
-    var tag_path = tag_dir + tag + '.html'
-    fs.writeFile(tag_path, tag_html)
-  })
+    });
+    tag_html += tag_template({posts: taggedPosts, tag: tag});
+    tag_html += footer_template();
+    let tag_path = tag_dir + tag + '.html';
+    fs.writeFile(tag_path, tag_html);
+  });
 }
 
 function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1)
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function renderPages() {
-  fs.readdir(page_dir, function(err, files) {
-    files.forEach(function(page) {
-      var title = capitalize(path.basename(page, '.hbs'))
-      var html = header_template({
+  fs.readdir(page_dir, (err, files) => {
+    files.forEach((page) => {
+      let title = capitalize(path.basename(page, '.hbs'));
+      let html = header_template({
         title: title + ' | frankrowe.org'
-      })
+      });
       html += renderPage(path.join(page_dir, page), {
         posts: posts
-      })
-      html += footer_template()
-      var html_path = path.basename(page, '.hbs') + '.html'
-      fs.writeFile(html_path, html)
-    })
-  })
+      });
+      html += footer_template();
+      let html_path = path.basename(page, '.hbs') + '.html';
+      fs.writeFile(html_path, html);
+    });
+  });
 }
 
 function renderPage(page_path, data) {
-  var template =  handlebars.compile(fs.readFileSync(page_path, 'utf8'))
-  data.filename = page_path
-  data.alltags = alltags
-  var html = template(data)
-  return html
+  let template =  handlebars.compile(fs.readFileSync(page_path, 'utf8'));
+  data.filename = page_path;
+  data.alltags = alltags;
+  let html = template(data);
+  return html;
 }
 
 function renderIndex() {
-  var index = header_template({
+  let index = header_template({
     title: 'frankrowe.org'
-  })
-  posts.forEach(function(post) {
+  });
+  posts.forEach((post) => {
     if (post.published) {
-      index += renderPost(post)
+      index += renderPost(post);
     }
-  })
-  index += footer_template()
-  fs.writeFile('index.html', index)
+  });
+  index += footer_template();
+  fs.writeFile('index.html', index);
 }
 
 function renderPost(post) {
-  post.content = fs.readFileSync(path.join(post_dir, post.file + '.hbs'), 'utf8')
-  return renderPage('templates/includes/post.hbs', post)
+  post.content = fs.readFileSync(path.join(post_dir, post.file + '.hbs'), 'utf8');
+  return renderPage('templates/includes/post.hbs', post);
 }
 
 function renderPosts() {
-  posts.forEach(function(post) {
+  posts.forEach((post) => {
     if (post.published) {
-      var html = header_template({
+      let html = header_template({
         title: post.title + ' | frankrowe.org'
-      })
-      html += renderPost(post)
-      html += footer_template()
-      var post_path = 'posts/' + post.date
-      mkpath.sync(post_path)
-      post_path = path.join(post_path, post.file) + '.html'
-      fs.writeFile(post_path, html)
+      });
+      html += renderPost(post);
+      html += footer_template();
+      let post_path = 'posts/' + post.date;
+      mkpath.sync(post_path);
+      post_path = path.join(post_path, post.file) + '.html';
+      fs.writeFile(post_path, html);
     }
   })
 }
 
 function makeRSSFeed() {
-  var feed = new RSS({
+  let feed = new RSS({
     title: 'frankrowe.org',
     site_url: 'http://frankrowe.org',
     description: 'The personal blog of Frank Rowe, an independent web and GIS developer located on the Eastern Shore of Maryland.'
-  })
-  _.first(posts, 5).forEach(function(post) {
+  });
+  _.first(posts, 5).forEach((post) => {
     feed.item({
       title: post.title,
       description: post.description,
       url: 'http://frankrowe.org/posts/' + post.date + '/' + post.file + '.html',
       guid: post.id,
       date: moment(post.date, 'YYYY/MM/DD')
-    })
-  })
-  var xml = feed.xml()
-  fs.writeFile('./rss.xml', xml)
+    });
+  });
+  let xml = feed.xml();
+  fs.writeFile('./rss.xml', xml);
 }
 
 function build(path) {
-  console.log('build')
-  getTemplates()
-  getPosts()
-  renderTags()
-  renderPages()
-  renderIndex()
-  renderPosts()
-  makeRSSFeed()
-  console.log('done')
-  return
+  console.log('build');
+  getPosts();
+  getTags();
+  renderTags();
+  renderPages();
+  renderIndex();
+  renderPosts();
+  makeRSSFeed();
+  console.log('done');
+  return;
 }
 
-build()
+build();

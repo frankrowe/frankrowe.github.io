@@ -31,11 +31,12 @@ a {
 }
 
 p > a {
+  text-decoration: underline;
   background: #fffff0;
 }
 
 h2 {
-  
+
 }
 
 a:hover {
@@ -96,6 +97,15 @@ header a {
   text-align: right;
 }
 
+@media all and (max-width: 660px) {
+  .contact-bar ul.navigation {
+    width: 100%;
+    padding: 10px 0 0 0;
+    float: left;
+    text-align: left;
+  }
+}
+
 .contact-bar .title {
   float: left;
   padding-left: 30px;
@@ -103,7 +113,11 @@ header a {
 
 ul.navigation li {
   display: inline-block;
-  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul.navigation li:last-child {
+  margin-right: 0;
 }
 
 .marker {

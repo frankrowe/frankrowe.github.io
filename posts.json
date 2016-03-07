@@ -178,5 +178,23 @@
     "published": true,
     "tags": ["GIS", "design"],
     "description": "<p>A new take on QGIS icons</p>"
+  },
+  {
+    "id": 21,
+    "date": "2016/03/15",
+    "title": "Using React's FixedDataTable as an Attribute Table",
+    "file": "iso-attribute-table",
+    "published": true,
+    "tags": ["GIS", "js", "opensource"],
+    "description": "<p>Using React's FixedDataTable as an Attribute Table</p>"
+  },
+  {
+    "id": 22,
+    "date": "2016/05/05",
+    "title": "PostGIS to Vector Tiles (with OpenLayers)",
+    "file": "postgistovector",
+    "published": false,
+    "tags": ["js", "GIS", "PostGIS", "openlayers"],
+    "description": ""
   }
 ]

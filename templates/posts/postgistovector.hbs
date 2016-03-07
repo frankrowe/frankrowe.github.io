@@ -1,0 +1,44 @@
+<p>This is an update to my <a href="/posts/2015/03/17/postgis-to-protobuf.html">previous post</a> on creating vector tiles from a PostGIS data source. That post has generated a bit of interest, so I wanted to go over a new way to display your vector tiles. OpenLayers 3 now <a href="http://openlayersbook.github.io/ch05-using-vector-layers/example-04.html">natively supports vector tiles</a>.</p>
+<p>Now with OL3, you can easily add your own vector tile source over a Mapbox vector tile basemap:</p>
+<pre><code class="js">var key = 'your mapbox api token';
+var stroke = new ol.style.Stroke({
+  color: 'rgba(255,0,0,0.9)',
+  width: 5
+});
+
+var vectorStyle = new ol.style.Style({
+  stroke: stroke
+});
+var map = new ol.Map({
+  layers: [
+    //local vector tiles from postgis
+    new ol.layer.VectorTile({
+      source: new ol.source.VectorTile({
+        format: new ol.format.MVT(),
+        tileGrid: ol.tilegrid.createXYZ({maxZoom: 22}),
+        tilePixelRatio: 16,
+        url: '/vector-tiles/layername/{z}/{x}/{y}.pbf'
+      }),
+      style: vectorStyle
+    }),
+    //mapbox vector tile basemap
+    new ol.layer.VectorTile({
+      source: new ol.source.VectorTile({
+        attributions: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> ' +
+          '© <a href="http://www.openstreetmap.org/copyright">' +
+          'OpenStreetMap contributors</a>',
+        format: new ol.format.MVT(),
+        tileGrid: ol.tilegrid.createXYZ({maxZoom: 22}),
+        tilePixelRatio: 16,
+        url: 'http://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/' +
+            '{z}/{x}/{y}.vector.pbf?access_token=' + key
+      }),
+      style: createMapboxStreetsV6Style()
+    })
+  ],
+  target: 'map',
+  view: new ol.View({
+    center: [0, 0],
+    zoom: 4
+  })
+});</code></pre>

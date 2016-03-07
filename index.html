@@ -13,7 +13,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.34">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.65">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,6 +39,24 @@
     </div>
       <div class="row">
         <div class="col-md-12">
+<div id="21" class="post">
+  <h2><a href="/posts/2016/03/15/iso-attribute-table.html">Using React&#x27;s FixedDataTable as an Attribute Table</a></h2>
+  <p class="date">Mar 15, 2016
+    <span class="post-link">
+      <a href="/posts/2016/03/15/iso-attribute-table.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/GIS.html">#GIS</a>
+        <a href="/tag/js.html">#js</a>
+        <a href="/tag/opensource.html">#opensource</a>
+    </span>
+  </p>
+  <p class="text-center"><img src="/img/iso-attribute-table.gif" class="img-responsive"></p>
+<p>I just updated <a href="http://frankrowe.org/iso/">iso</a> to React 0.14.7 after not being able to work on it for a few months. Turns out, React has changed a lot in that time, including <a href="http://facebook.github.io/fixed-data-table/">FixedDataTable</a>, a popular React component for making better tables.</p>
+<p>It is perfect for something like an Attribute Table in GIS, because there are an unknown number of columns/rows when displaying random data. FixedDataTable supports a fixed header row to make scrolling easier, fixed columns (good for an index column in this application), and column resizing. It also adds nice hooks for row clicking, so we can update the data model to select features on click.</p>
+<p>Check out the code in iso that created a FixedDataTable from GeoJSON here: <a href="https://github.com/frankrowe/iso/blob/gh-pages/src/components/AttributeTable.jsx">https://github.com/frankrowe/iso/blob/gh-pages/src/components/AttributeTable.jsx</a>.</p>
+
+</div>
 <div id="20" class="post">
   <h2><a href="/posts/2016/03/04/qgis-icons.html">A new take on some QGIS icons</a></h2>
   <p class="date">Mar 04, 2016
