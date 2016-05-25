@@ -196,5 +196,14 @@
     "published": false,
     "tags": ["js", "GIS", "PostGIS", "openlayers"],
     "description": ""
+  },
+  {
+    "id": 23,
+    "date": "2016/05/24",
+    "title": "Build a cross platform module for React and React Native",
+    "file": "cross-platform-modules",
+    "published": true,
+    "tags": ["js"],
+    "description": ""
   }
 ]

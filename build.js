@@ -106,8 +106,8 @@ function renderIndex() {
   let index = header_template({
     title: 'frankrowe.org'
   });
-  posts.forEach((post) => {
-    if (post.published) {
+  posts.forEach((post, idx) => {
+    if (post.published && idx < 10) {
       index += renderPost(post);
     }
   });

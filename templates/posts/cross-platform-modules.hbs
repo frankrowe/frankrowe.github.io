@@ -1,0 +1,74 @@
+<p><img src="/img/crossplatform-module3.png" width="300" class="img-responsive"></p>
+<p>For <a href="https://github.com/boundlessgeo/spatialconnect-ios-sdk">SpatialConnect</a>, we need the ability to have unified interfaces across web and native. The stack we are using is React and React Native, written in ES6 with babel and webpack.</p>
+<p>What we want is the ability to install one module in our React web app and our React Native iOS and Android apps and have that module display the correct component based on platform.</p>
+<p>The solution we are currently using is <a href="https://webpack.github.io/docs/configuration.html#resolve-alias">webpack's resolve.alias</a> and multiple outputs. The <strong>big advantage</strong> to this is it allows us to treat the web and native versions of a component as a single component within our module.</p>
+<pre><code class="javascript">//src/index.js
+import { componentA } from './components';
+
+//do cool things with componentA, we don't care if it's a web or native component</code>
+</pre>
+<pre><code class="javascript">//src/components/index.js
+import componentA from 'componentA';
+import componentB from 'componentB';
+
+export default { componentA, componentB };</code>
+</pre>
+<pre><code class="javascript">//webpack.web.js
+module.exports = {
+  entry: {
+    './web/index': './src/index.js' //create web/index.js entry
+  },
+  resolve: {
+    alias: {
+      'componentA': './componentA.web', //the important part
+      'componentB': './componentB.web',
+    }
+  },
+  externals: {
+    'react': 'react'
+  },
+  output: {
+    library: 'crossplatformmodules',
+    libraryTarget: 'umd',
+    filename: '[name].js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules)/,
+        loader: 'babel'
+      }
+    ]
+  }
+};</code>
+</pre>
+<pre><code class="javascript">//webpack.web.js
+module.exports = {
+  entry: {
+    './native/index': '.src/index.js'
+  },
+  resolve: {
+    alias: {
+      'componentA': './componentA.native',
+      'componentB': './componentB.native',
+    }
+  },
+  externals: {
+    'react-native': 'react-native'
+  }...</code>
+</pre>
+<pre><code class="javascript">//package.json
+"main": "web/index.js",
+"scripts": {
+  "build": "npm run build-web && npm run build-native",
+  "build-web": "webpack --config webpack.web.js",
+  "build-native": "webpack --config webpack.native.js"
+}</code>
+ </pre><p>You can then import the default module in your web code, and the native version in your native app.</p>
+<pre><code class="javascript">//web.app.js
+import crossplatform from 'crossplatform';
+
+//index.ios.js
+import crossplatform from 'crossplatform/native';</code>
+</pre>

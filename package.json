@@ -1,12 +1,11 @@
 {
   "name": "frankrowe.org",
-  "version": "1.0.65",
+  "version": "1.0.136",
   "description": "frankrowe.org =============",
   "main": "index.js",
   "scripts": {
-    "prebuild": "npm run compile && npm --no-git-tag-version version patch",
+    "prebuild": "npm --no-git-tag-version version patch",
     "build": "node ./build-compiled.js",
-    "postbuild": "git add . && git commit -m \"build\"",
     "compile": "babel ./build.js --out-file ./build-compiled.js",
     "watch": "onchange './templates' './posts.json' -- npm run build"
   },

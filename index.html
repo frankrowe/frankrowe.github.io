@@ -12,8 +12,9 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.65">
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css"> -->
+    <link rel="stylesheet" href="/css/github.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.136">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,6 +40,92 @@
     </div>
       <div class="row">
         <div class="col-md-12">
+<div id="23" class="post">
+  <h2><a href="/posts/2016/05/24/cross-platform-modules.html">Build a cross platform module for React and React Native</a></h2>
+  <p class="date">May 24, 2016
+    <span class="post-link">
+      <a href="/posts/2016/05/24/cross-platform-modules.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/js.html">#js</a>
+    </span>
+  </p>
+  <p><img src="/img/crossplatform-module3.png" width="300" class="img-responsive"></p>
+<p>For <a href="https://github.com/boundlessgeo/spatialconnect-ios-sdk">SpatialConnect</a>, we need the ability to have unified interfaces across web and native. The stack we are using is React and React Native, written in ES6 with babel and webpack.</p>
+<p>What we want is the ability to install one module in our React web app and our React Native iOS and Android apps and have that module display the correct component based on platform.</p>
+<p>The solution we are currently using is <a href="https://webpack.github.io/docs/configuration.html#resolve-alias">webpack's resolve.alias</a> and multiple outputs. The <strong>big advantage</strong> to this is it allows us to treat the web and native versions of a component as a single component within our module.</p>
+<pre><code class="javascript">//src/index.js
+import { componentA } from './components';
+
+//do cool things with componentA, we don't care if it's a web or native component</code>
+</pre>
+<pre><code class="javascript">//src/components/index.js
+import componentA from 'componentA';
+import componentB from 'componentB';
+
+export default { componentA, componentB };</code>
+</pre>
+<pre><code class="javascript">//webpack.web.js
+module.exports = {
+  entry: {
+    './web/index': './src/index.js' //create web/index.js entry
+  },
+  resolve: {
+    alias: {
+      'componentA': './componentA.web', //the important part
+      'componentB': './componentB.web',
+    }
+  },
+  externals: {
+    'react': 'react'
+  },
+  output: {
+    library: 'crossplatformmodules',
+    libraryTarget: 'umd',
+    filename: '[name].js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules)/,
+        loader: 'babel'
+      }
+    ]
+  }
+};</code>
+</pre>
+<pre><code class="javascript">//webpack.web.js
+module.exports = {
+  entry: {
+    './native/index': '.src/index.js'
+  },
+  resolve: {
+    alias: {
+      'componentA': './componentA.native',
+      'componentB': './componentB.native',
+    }
+  },
+  externals: {
+    'react-native': 'react-native'
+  }...</code>
+</pre>
+<pre><code class="javascript">//package.json
+"main": "web/index.js",
+"scripts": {
+  "build": "npm run build-web && npm run build-native",
+  "build-web": "webpack --config webpack.web.js",
+  "build-native": "webpack --config webpack.native.js"
+}</code>
+ </pre><p>You can then import the default module in your web code, and the native version in your native app.</p>
+<pre><code class="javascript">//web.app.js
+import crossplatform from 'crossplatform';
+
+//index.ios.js
+import crossplatform from 'crossplatform/native';</code>
+</pre>
+
+</div>
 <div id="21" class="post">
   <h2><a href="/posts/2016/03/15/iso-attribute-table.html">Using React&#x27;s FixedDataTable as an Attribute Table</a></h2>
   <p class="date">Mar 15, 2016
@@ -235,255 +322,6 @@
 <p>Also, this would be really cool if implemented in a vector tiles based map, like MapBox GL. Since there are no fixed "zoom levels" in a GL rendered map, you could tie the touch pressure and zoom more closely together. A light press zooming the map a very small amount, a hard press zooming farther, etc.</p>
 
 </div>
-<div id="13" class="post">
-  <h2><a href="/posts/2015/09/04/dynamic-legend.html">Creating a Dynamic Legend</a></h2>
-  <p class="date">Sep 04, 2015
-    <span class="post-link">
-      <a href="/posts/2015/09/04/dynamic-legend.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-    </span>
-  </p>
-  <p>
-  Maps that show a lot of data are cool. But try to show too many things at once and things get confusing. Recently I tried to help this problem this by creating a dynamic legend - a legend that only shows a layer if it has features visible in the current map view.
-</p>
-<p style="text-align: center"><img src="/img/legend.png" class="img-responsive"></p>
-<p>
-  For maps with just a few simple layers, this is pretty easy and something you can do on the client with a library like <a href="http://turfjs.org/static/docs/module-turf_intersect.html">turf-intersect</a>. But for this project, I had hundreds of complex layers covering most of the United States and Canada. I needed to come up with the fastest way possible to check every one of these layers for features in the current map view.
-</p>
-<p>
-  This first thing I did was create a function that looped through every layer and ran a simple query to count the number of geometries that intersected the map's bounding box. I aggregated these results up and sent it back, where the client would hide a layer if there were zero intersecting geometries. This worked, but it was agonizingly slow. Every map pan caused a 20-30 second request to fire, usually not even finishing before you wanted to pan the map again.
-</p>
-<p>
-  Three things needed to be done to make this legend faster:
-  <ol>
-    <li>Reduce the number of layers that needed to be checked.</li>
-    <li>Reduce the number of queries that needed to be run for layers that did need to be checked.</li>
-    <li>Make the query that checks for intersection as fast as possible.</li>
-  </ol>
-</p>
-<p>
-  For step 1, I pre-calculated each layer's bounding box and sent that to the client on the initial map load. Now I could loop through and check if each layers' bbox intersected the map's. If it didn't intersect, I wouldn't have to go back to the server to check that layer. In many cases this reduced the number of layers to check by nearly half.
-</p>
-<p>
-  For step 2, instead of looping and running an intersects query for each layer, I <a href="http://www.postgresql.org/docs/8.3/static/queries-union.html">unioned</a> each query together. This eliminated all the overhead of starting and executing hundreds of queries on each map move.
-</p>
-<p>
-  Finally, I had to make the actual query as fast as possible. I realized that I didn't need to return the actual number of geometries that intersected, I just need a true or false. For some layers with 1M+ points and a large bounding box, counting was a big deal. Instead of selecting count(), I just selected "layerName" and added a limit of 1. Only the tables with intersecting geometries would be returned. The final query turned into something like this:
-</p>
-<pre><code class="sql">(select 'layerA' from schema.layerA where st_intersects(geom, st_geometryfromtext(bbox, 4326)) limit 1)
-union
-(select 'layerB' from schema.layerB where st_intersects(geom, st_geometryfromtext(bbox, 4326)) limit 1)
-union
-(select 'layerC' from schema.layerC where st_intersects(geom, st_geometryfromtext(bbox, 4326)) limit 1)
-</code></pre>
-<p>
-  The legend now was pretty fast at responding on every map pan. The request was down to 2s instead of 20-30s previously. We now had a legend that always showed only what was needed, and a much more usable map.
-</p>
-<p>
-  I am still trying to make this legend faster. If you have any ideas or a better way to do this, let me know on <a href="https://twitter.com/fsrowe">twitter</a>.
-</p>
-
-</div>
-<div id="12" class="post">
-  <h2><a href="/posts/2015/08/28/hotplate.html">HotPlate</a></h2>
-  <p class="date">Aug 28, 2015
-    <span class="post-link">
-      <a href="/posts/2015/08/28/hotplate.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/misc.html">#misc</a>
-    </span>
-  </p>
-  <p class="text-center"><img src="/img/hotplate.png" class="img-responsive"></p>
-<p><a href="http://hotplate.io/">HotPlate</a> is a platform to leave messages for license plates.</p>
-<p>
-  I wanted to make this as simple as possible. No signing up, no private messages, no "claiming plates", no fancy features. Anyone can look up any plate, anyone can leave a message on any plate, it's all in the open, and it doesn't track users.
-</p>
-<p>
-  The tech: A Node app backed by Mongo running on Linode.
-</p>
-<p><a href="http://hotplate.io/plate/MD/lem022">My plate</a> already has a few interesting comments!</p>
-
-</div>
-<div id="11" class="post">
-  <h2><a href="/posts/2015/05/04/iso-simplify.html">Simplify a GeoJSON file in iso</a></h2>
-  <p class="date">May 04, 2015
-    <span class="post-link">
-      <a href="/posts/2015/05/04/iso-simplify.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/GIS.html">#GIS</a>
-    </span>
-  </p>
-  <p style="text-align: center"><img src="/img/iso1.gif" class="img-responsive"></p>
-<p>Open a .geojson file in iso, select the feature you want to edit, and choose Feature > Transformation > Simplify. Input your simplification tolerance, and hit OK. You can then save your layer as a new geojson file.</p>
-<p><a href="http://turfjs.org/static/docs/module-turf_simplify.html">Turf's simplify API</a></p>
-<p><a href="http://frankrowe.org/iso/">iso</a></p>
-
-</div>
-<div id="10" class="post">
-  <h2><a href="/posts/2015/03/17/postgis-to-protobuf.html">PostGIS to Protobuf (with vector tiles)</a></h2>
-  <p class="date">Mar 17, 2015
-    <span class="post-link">
-      <a href="/posts/2015/03/17/postgis-to-protobuf.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/GIS.html">#GIS</a>
-        <a href="/tag/PostGIS.html">#PostGIS</a>
-    </span>
-  </p>
-  <p style="text-align: center"><img src="/img/vector-tiles.jpg" class="img-responsive"></p>
-<p>I have seen a lot of talk about <a href="https://github.com/google/protobuf/">protobol buffers</a> and <a href="https://www.mapbox.com/developers/vector-tiles/">vector tiles</a> recently, which promises improved performance loading and rendering layers than just plain geojson. I've seen a lot of demos of the tech, but had trouble putting it all together. This is my first attempt at creating a server that will query PostGIS, serve vector tiles encoded into protobuf, and render them on a Leaflet map.</p>
-<p>Create a layer in Leaflet, using the excellent <a href="https://github.com/SpatialServer/Leaflet.MapboxVectorTile">Leaflet.MapboxVectorTile</a> plugin.</p>
-<pre><code class="js">var vectorTileLayer = new L.TileLayer.MVTSource({
-  url: '/vector-tiles/layername/{z}/{x}/{y}.pbf',
-  clickableLayers: ['layername'],
-  getIDForLayerFeature: function(feature) {
-    return feature._id
-  }
-})
-map.addLayer(vectorTileLayer)</code></pre>
-<p>Create a route to match the above URL. Create a node server with Express, and add a route similar to a standard tile layer:</p>
-<pre><code class="js">router.get('/vector-tiles/:layername/:z/:x/:y.pbf', function(req, res) {
-
-})</code></pre>
-<p>Get the bounding box of our data, using the <a href="https://www.npmjs.com/package/sphericalmercator">sphericalmercator</a> library</p>
-<pre><code class="js">var SphericalMercator = require('sphericalmercator')
-var mercator = new SphericalMercator({
-  size: 256 //tile size
-})
-var bbox = mercator.bbox(
-  +req.params.x,
-  +req.params.y,
-  +req.params.z,
-  false,
-  '4326'
-)</code></pre>
-<p>Use this bounding box to query PostGIS for the data we need for this tile. Convert the resulting rows into a single geojson feature collection.</p>
-<pre><code class="sql">select st_asgeojson(geom) as feature from table where st_intersects(geom, bbox)
-</code></pre>
-<p>Now that we have the geojson for the tile, we can create a vector tile using <a href="https://www.npmjs.com/package/mapnik">node-mapnik</a></p>
-<pre><code class="js">var mapnik = require('mapnik')
-var vtile = new mapnik.VectorTile(+req.params.z, +req.params.x, +req.params.y)
-vtile.addGeoJSON(JSON.stringify(geojson), 'layername')</code></pre>
-<p>Finally, use vtile.getData() to get the protobuf-encoded buffer from the vector tile, pass it through zlib.deflate to compress, set the correct headers, and serve it.</p>
-<pre><code class="js">res.setHeader('Content-Encoding', 'deflate')
-res.setHeader('Content-Type', 'application/x-protobuf')
-zlib.deflate(vtile.getData(), function(err, pbf) {
-  res.send(pbf)
-})
-</code></pre>
-<p>Your vectorTileLayer in Leaflet should now be working.</p>
-<p>So far, this seems to load complex layers much faster than querying and returning the entire geojson for a bounding box, and has the advantage of sending actual vector data to the client, unlike a traditional tile layer.</p>
-<p>Discuss with me on <a href="https://twitter.com/fsrowe">twitter</a>.</p>
-</div>
-<div id="9" class="post">
-  <h2><a href="/posts/2015/02/25/so-long.html">So Long</a></h2>
-  <p class="date">Feb 25, 2015
-    <span class="post-link">
-      <a href="/posts/2015/02/25/so-long.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/misc.html">#misc</a>
-    </span>
-  </p>
-  <p style="text-align: center"><img src="/img/so-long.png" class="img-responsive"></p>
-<p>Today I pushed to master on <a href="http://esrgc.org">esrgc.org</a>, removing myself from the About page. It ends a five year long journey at the co-op. I learned so much in my time there, about programming and life in general. It was the perfect place to begin my career.</p>
-<p>For now,  I'll continue freelancing in the geospatial field. I'm going to focus on creating and contributing to open source tools and the open source community. My goal moving forward is simple and has not changed: to work on software that people want to use.</p>
-</div>
-<div id="8" class="post">
-  <h2><a href="/posts/2015/01/17/maryland-geojson.html">Maryland in GeoJSON</a></h2>
-  <p class="date">Jan 17, 2015
-    <span class="post-link">
-      <a href="/posts/2015/01/17/maryland-geojson.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/GIS.html">#GIS</a>
-        <a href="/tag/opensource.html">#opensource</a>
-    </span>
-  </p>
-  <p style="text-align: center"><img src="/img/maryland-geojson.png" class="img-responsive"></p>
-<p>Useful political boundaries of Maryland in GeoJSON format.</p>
-<p><a href="https://github.com/frankrowe/maryland-geojson">https://github.com/frankrowe/maryland-geojson</a></p>
-</div>
-<div id="7" class="post">
-  <h2><a href="/posts/2014/12/04/better-chart-hover.html">Improved GeoDash Interaction</a></h2>
-  <p class="date">Dec 04, 2014
-    <span class="post-link">
-      <a href="/posts/2014/12/04/better-chart-hover.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/dataviz.html">#dataviz</a>
-        <a href="/tag/opensource.html">#opensource</a>
-    </span>
-  </p>
-  <p class="text-center"><img src="/img/geodash-hover.png" class="img-responsive"></p>
-<p>Hovering points on line charts was becoming harder and harder as data size increased and point radius decreased. Solution? Bigger mouse targets on top of data points. Reduce target opacity to zero and find the matching data point on mouse over, and bam - much better interactivity.</p>
-<p>Live demo: <a href="http://frankrowe.github.io/geodash/">http://frankrowe.github.io/geodash/</a></p>
-</div>
-<div id="6" class="post">
-  <h2><a href="/posts/2014/12/02/leaflet-crosshairs.html">Leaflet Crosshairs</a></h2>
-  <p class="date">Dec 02, 2014
-    <span class="post-link">
-      <a href="/posts/2014/12/02/leaflet-crosshairs.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/leaflet.html">#leaflet</a>
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/opensource.html">#opensource</a>
-    </span>
-  </p>
-  <p><img src="/img/leaflet-crosshairs.jpeg" class="img-responsive"></p>
-<p>Leaflet.Crosshairs is a leaflet plugin to turn a mouse cursor into a crosshairs on map hover.</p>
-<p>This works well for determining lat/long coordinates when combined with map graticules.</p>
-<p>Live demo: <a href="http://frankrowe.github.io/Leaflet.Crosshairs/">http://frankrowe.github.io/Leaflet.Crosshairs/</a></p>
-<p>GitHub: <a href="https://github.com/frankrowe/Leaflet.Crosshairs">https://github.com/frankrowe/Leaflet.Crosshairs</a></p>
-</div>
-<div id="5" class="post">
-  <h2><a href="/posts/2014/08/15/geodash.html">GeoDash</a></h2>
-  <p class="date">Aug 15, 2014
-    <span class="post-link">
-      <a href="/posts/2014/08/15/geodash.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/dataviz.html">#dataviz</a>
-        <a href="/tag/opensource.html">#opensource</a>
-    </span>
-  </p>
-  <p class="text-center"><img src="/img/geodash.png" class="img-responsive"></p>
-<p>GeoDash is a minimal javascript chart library. It's built on <a href="http://d3js.org">D3</a> and supports horizontal and vertical bar charts, stacked bar charts, pie charts and line charts.</p>
-<p>Why is it called GeoDash? Mostly because I built this while building "geodashboards" that usually involved a map. Also because using "geo" in anything makes it cool.</p>
-<p>Live demo: <a href="http://frankrowe.github.io/geodash/">http://frankrowe.github.io/geodash/</a></p>
-</div>
-<div id="2" class="post">
-  <h2><a href="/posts/2014/07/24/cloud-render.html">Map Rendering with TileMill and Amazon EC2</a></h2>
-  <p class="date">Jul 24, 2014
-    <span class="post-link">
-      <a href="/posts/2014/07/24/cloud-render.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/GIS.html">#GIS</a>
-    </span>
-  </p>
-  <p><img src="/img/denver.jpeg" class="img-responsive"></p>
-<p>Rendering with TileMill and PostGIS on Amazon EC2.</p>
-<p>1. Load data into PostGIS.</p>
-<p>2. Create shapefile of desired map.</p>
-<p>3. Create local TileMill project to generate project.mml file.</p>
-<p>4. Create Amazon EC2 server loaded with TileMill. Use Springmeyer's awesome <a href="https://gist.github.com/springmeyer/b0bbcd976378cf3e4e44">guide</a> for this.</p>
-<p>5. Upload shapefile to EC2 server.</p>
-<p>6. Upload tilemill project to EC2 server.</p>
-<p>7. Render map to mbtiles.</p>
-<p>8. Download mbtiles to wherever the map will be served.</p>
-<p>9. ???</p>
-<p>10. Profit.</p>
-</div>
         </div>
       </div>
       <div class="row">
@@ -508,7 +346,7 @@ zlib.deflate(vtile.getData(), function(err, pbf) {
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad()</script>
   </body>
 </html>

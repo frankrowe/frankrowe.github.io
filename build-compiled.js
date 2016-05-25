@@ -135,8 +135,8 @@ function renderIndex() {
   var index = header_template({
     title: 'frankrowe.org'
   });
-  _posts2.default.forEach(function (post) {
-    if (post.published) {
+  _posts2.default.forEach(function (post, idx) {
+    if (post.published && idx < 10) {
       index += renderPost(post);
     }
   });
