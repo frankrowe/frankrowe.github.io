@@ -1,19 +1,21 @@
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
 
 body {
-  color: rgb(81, 96, 102);
+  color: #333;
   font-size: 16px;
-  font-family: "museo-sans", sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   font-weight: 300;
   background: #ffffff;
 }
 
 p {
   line-height: 24px;
-  color: #444;
+  color: #333;
 }
 
 pre {
@@ -30,17 +32,15 @@ a {
   color: #058145;
 }
 
+a:hover {
+  color: #058145;
+}
+
 p > a {
   text-decoration: underline;
-  background: #fffff0;
 }
 
 h2 {
-
-}
-
-a:hover {
-  color: #058145;
 }
 
 .topbar {
@@ -51,7 +51,6 @@ a:hover {
 }
 
 .container {
-
 }
 
 header {
@@ -66,7 +65,6 @@ header .profile {
 }
 
 header .header-text {
-
 }
 
 .header-text h1 {
@@ -109,6 +107,15 @@ header a {
 .contact-bar .title {
   float: left;
   padding-left: 30px;
+  font-weight: bold;
+}
+
+.contact-bar .title a {
+  color: #333;
+}
+
+.contact-bar .title a:hover {
+  text-decoration: none;
 }
 
 ul.navigation li {
@@ -126,7 +133,6 @@ ul.navigation li:last-child {
 }
 
 .marker:hover {
-
 }
 
 .marker img {
@@ -142,13 +148,13 @@ ul.navigation li:last-child {
 
 .post img {
   margin: 0 auto;
-  text-align: center
+  text-align: center;
 }
 
 .post h2 {
-  border-bottom: 2px solid #333;
-  font-weight: 300;
+  font-weight: 500;
   display: inline-block;
+  margin-bottom: 0px;
 }
 
 .post h2 a {
@@ -157,7 +163,6 @@ ul.navigation li:last-child {
 
 .post h2 a:hover {
   text-decoration: none;
-  color: #045b31;
 }
 
 .post .date {
@@ -177,10 +182,10 @@ ul.navigation li:last-child {
 table.archive {
   width: 100%;
   color: rgb(81, 96, 102);
-
 }
 
-table.archive td, table.archive th {
+table.archive td,
+table.archive th {
   border-collapse: collapse;
   padding: 5px;
   border-bottom: 1px solid #f2f2f2;
@@ -192,10 +197,7 @@ table.archive td:last-child {
 }
 
 td {
-
 }
-
-
 
 /* Wobble Top */
 @-webkit-keyframes hvr-wobble-top {
@@ -274,7 +276,9 @@ td {
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
 }
-.hvr-wobble-top:hover, .hvr-wobble-top:focus, .hvr-wobble-top:active {
+.hvr-wobble-top:hover,
+.hvr-wobble-top:focus,
+.hvr-wobble-top:active {
   -webkit-animation-name: hvr-wobble-top;
   animation-name: hvr-wobble-top;
   -webkit-animation-duration: 1s;
