@@ -114,7 +114,8 @@
     "file": "dynamic-legend",
     "published": true,
     "tags": ["js"],
-    "description": "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>"
+    "description":
+      "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>"
   },
   {
     "id": 14,
@@ -150,7 +151,8 @@
     "file": "spdcallsmap",
     "published": true,
     "tags": ["js", "map", "opendata", "opensource"],
-    "description": "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
+    "description":
+      "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
   },
   {
     "id": 18,
@@ -204,6 +206,15 @@
     "file": "cross-platform-modules",
     "published": true,
     "tags": ["js"],
+    "description": ""
+  },
+  {
+    "id": 24,
+    "date": "2018/01/30",
+    "title": "Basemap Selector UI for Mobile Apps",
+    "file": "basemap-selection-ui",
+    "published": true,
+    "tags": ["UI"],
     "description": ""
   }
 ]
