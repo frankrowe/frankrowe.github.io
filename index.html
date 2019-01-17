@@ -13,7 +13,7 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css"> -->
   <link rel="stylesheet" href="/css/github.css">
-  <link rel="stylesheet" href="/css/style.css?v=1.0.313">
+  <link rel="stylesheet" href="/css/style.css?v=1.0.326">
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,7 +39,77 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12"><div id="25" class="post">
+      <div class="col-md-12"><div id="26" class="post">
+  <h2><a href="/posts/2018/1/17/19/earthquake-api.html">Earthquake API</a></h2>
+  <p class="date">Jan 17, 2018
+    <span class="post-link">
+      <a href="/posts/2018/1/17/19/earthquake-api.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/GIS.html">#GIS</a>
+        <a href="/tag/Observable.html">#Observable</a>
+    </span>
+  </p>
+  <style>
+  .notebook {
+    padding: 10px;
+    background: #EFF1F2;
+  }
+
+  #earthquake-container > div {
+    margin-bottom: 10px;
+  }
+  output {
+    display: inline-block;
+  }
+  form {
+    width: 50%;
+  }
+  form div {
+    font-size: 1rem !important;
+  }
+  input {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+  input[type=date] {
+    line-height: 16px;
+  }
+  input[type=range] {
+    display: inline-block;
+    width: auto;
+  }
+</style>
+<script type="module">
+  // Load the Observable runtime and inspector.
+  import { Runtime, Inspector } from "https://unpkg.com/@observablehq/notebook-runtime?module";
+
+  // Your notebook, compiled as an ES module.
+  import notebook from "https://api.observablehq.com/@frankrowe/earthquakes.js";
+
+  // Load the notebook, observing its cells with a default Inspector
+  // that simply renders the value of each cell into the provided DOM node.
+  //Inspector.into(document.getElementById("planet-observable-container"))
+  const render = ['intro', 'viewof magnitude', 'viewof time', 'mapCanvas', 'selected'];
+  render.forEach(function (name) {
+    let node = document.createElement('div');
+    node.setAttribute('id', 'earthquake-' + name);
+    document.getElementById('earthquake-container').appendChild(node);
+  })
+  Runtime.load(notebook, (cell) => {
+    if (render.indexOf(cell.name) >= 0) {
+      return new Inspector(document.getElementById('earthquake-' + cell.name));
+    } else {
+      // Force evaluation of all the other cells in the notebook.
+      return true;
+    }
+  });
+</script>
+<p><a href="https://beta.observablehq.com/@frankrowe/earthquakes">Link to Observable notebook</a></p>
+<div id="earthquake-container" class="notebook"></div>
+</div>
+<div id="25" class="post">
   <h2><a href="/posts/2018/10/23/planet-api-explorer.html">Planet API Explorer</a></h2>
   <p class="date">Oct 23, 2018
     <span class="post-link">
@@ -51,6 +121,9 @@
     </span>
   </p>
   <style>
+  .notebook {
+    padding: 10px;
+  }
   #planet-container > div {
     margin-bottom: 10px;
   }
@@ -89,20 +162,20 @@
   const render = ['intro', 'viewof item_type', 'viewof start_date', 'viewof end_date', 'viewof cloud_cover', 'summary', 'mapCanvas', 'selected'];
   render.forEach(function (name) {
     let node = document.createElement('div');
-    node.setAttribute('id', name);
+    node.setAttribute('id', 'planet-' + name);
     document.getElementById('planet-container').appendChild(node);
   })
   Runtime.load(notebook, (cell) => {
     if (render.indexOf(cell.name) >= 0) {
-      return new Inspector(document.getElementById(cell.name));
+      return new Inspector(document.getElementById('planet-' + cell.name));
     } else {
       // Force evaluation of all the other cells in the notebook.
       return true;
     }
   });
 </script>
-<p><a href="https://beta.observablehq.com/@frankrowe/planet-api">Link to notebook</a></p>
-<div id="planet-container"></div>
+<p><a href="https://beta.observablehq.com/@frankrowe/planet-api">Link to Observable notebook</a></p>
+<div id="planet-container" class="notebook"></div>
 </div>
 <div id="24" class="post">
   <h2><a href="/posts/2018/01/30/basemap-selection-ui.html">Basemap Selector UIs for Mobile Apps</a></h2>
@@ -381,53 +454,6 @@ import crossplatform from 'crossplatform/native';</code>
 <p>This doesn't represent all calls reported, as some addresses can't be geocoded. Check the source data for all calls.</p>
 <p>The code for the map and automatic download/parse is open source here: <a href="https://github.com/frankrowe/spdcallsmap">https://github.com/frankrowe/spdcallsmap</a>.</p>
 <p>The PDF reports are parsed into raw GeoJSON files, available here: <a href="https://github.com/frankrowe/spdcallsmap/tree/master/data">https://github.com/frankrowe/spdcallsmap/tree/master/data</a>.</p>
-
-</div>
-<div id="16" class="post">
-  <h2><a href="/posts/2015/10/29/3dtouchbuffer.html">More 3D Touch Experiments: Drawing a Buffer</a></h2>
-  <p class="date">Oct 29, 2015
-    <span class="post-link">
-      <a href="/posts/2015/10/29/3dtouchbuffer.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-    </span>
-  </p>
-  <style>
-
-.media-flex {
-    position: relative;
-    height: 0px;
-    margin-bottom: 40px;
-}
-
-.media-flex .gfyitem > div,
-.media-flex .gfyitem .gfyPreLoadCanvas,
-.media-flex .gfyitem .gfyVid,
-.media-flex .gfyitem  .gfyGif {
-    position: absolute !important;
-    top: 0; right: 0; bottom: 0; left: 0;
-    width: 100% !important;
-    height: 100% !important;
-}
-</style>
-<div class="media-flex" style="padding-bottom: 56.25%;">
-    <img class="gfyitem" data-id="MenacingTediousAsianpiedstarling" />
-</div>
-<p>
-  
-</p>
-<p>
-  Drawing a buffer area is always kind of a pain, you have to either selected a radius from some predefined options in a dropdown, or use drawing tools. With 3D Touch you can just press harder on the map to select a larger area.
-</p>
-<script type="text/javascript">
-(function(d, t) {
-      var g = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      g.src = 'http://assets.gfycat.com/js/gfyajax-0.517d.js';
-      s.parentNode.insertBefore(g, s);
-}(document, 'script'));
-</script>
 
 </div>
 </div>

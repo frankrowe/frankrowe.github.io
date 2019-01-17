@@ -1,4 +1,7 @@
 <style>
+  .notebook {
+    padding: 10px;
+  }
   #planet-container > div {
     margin-bottom: 10px;
   }
@@ -37,17 +40,17 @@
   const render = ['intro', 'viewof item_type', 'viewof start_date', 'viewof end_date', 'viewof cloud_cover', 'summary', 'mapCanvas', 'selected'];
   render.forEach(function (name) {
     let node = document.createElement('div');
-    node.setAttribute('id', name);
+    node.setAttribute('id', 'planet-' + name);
     document.getElementById('planet-container').appendChild(node);
   })
   Runtime.load(notebook, (cell) => {
     if (render.indexOf(cell.name) >= 0) {
-      return new Inspector(document.getElementById(cell.name));
+      return new Inspector(document.getElementById('planet-' + cell.name));
     } else {
       // Force evaluation of all the other cells in the notebook.
       return true;
     }
   });
 </script>
-<p><a href="https://beta.observablehq.com/@frankrowe/planet-api">Link to notebook</a></p>
-<div id="planet-container"></div>
+<p><a href="https://beta.observablehq.com/@frankrowe/planet-api">Link to Observable notebook</a></p>
+<div id="planet-container" class="notebook"></div>

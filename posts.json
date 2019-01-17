@@ -223,5 +223,14 @@
     "published": true,
     "tags": ["GIS", "Observable"],
     "description": ""
+  },
+  {
+    "id": 26,
+    "date": "2018/1/17/19",
+    "title": "Earthquake API",
+    "file": "earthquake-api",
+    "published": true,
+    "tags": ["GIS", "Observable"],
+    "description": ""
   }
 ]
