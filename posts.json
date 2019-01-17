@@ -212,7 +212,7 @@
     "title": "Basemap Selector UIs for Mobile Apps",
     "file": "basemap-selection-ui",
     "published": true,
-    "tags": ["UI"],
+    "tags": ["UI", "GIS"],
     "description": ""
   },
   {
@@ -221,7 +221,7 @@
     "title": "Planet API Explorer",
     "file": "planet-api-explorer",
     "published": true,
-    "tags": ["GIS"],
+    "tags": ["GIS", "Observable"],
     "description": ""
   }
 ]
