@@ -75,7 +75,7 @@ function renderTags() {
     tag_html += tag_template({ posts: taggedPosts, tag: tag });
     tag_html += footer_template();
     let tag_path = tag_dir + tag + '.html';
-    fs.writeFile(tag_path, tag_html);
+    fs.writeFile(tag_path, tag_html, writeFileCallback);
   });
 }
 
@@ -95,7 +95,7 @@ function renderPages() {
       });
       html += footer_template();
       let html_path = path.basename(page, '.hbs') + '.html';
-      fs.writeFile(html_path, html);
+      fs.writeFile(html_path, html, writeFileCallback);
     });
   });
 }
@@ -118,7 +118,7 @@ function renderIndex() {
     }
   });
   index += footer_template();
-  fs.writeFile('index.html', index);
+  fs.writeFile('index.html', index, writeFileCallback);
 }
 
 function renderPost(post) {
@@ -140,7 +140,7 @@ function renderPosts() {
       let post_path = 'posts/' + post.date;
       mkpath.sync(post_path);
       post_path = path.join(post_path, post.file) + '.html';
-      fs.writeFile(post_path, html);
+      fs.writeFile(post_path, html, writeFileCallback);
     }
   });
 }
@@ -163,7 +163,11 @@ function makeRSSFeed() {
     });
   });
   let xml = feed.xml();
-  fs.writeFile('./rss.xml', xml);
+  fs.writeFile('./rss.xml', xml, writeFileCallback);
+}
+
+function writeFileCallback(err, result) {
+  if (err) console.log('error', err);
 }
 
 function build(path) {

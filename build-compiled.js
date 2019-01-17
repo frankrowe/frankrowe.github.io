@@ -98,7 +98,7 @@ function renderTags() {
     tag_html += tag_template({ posts: taggedPosts, tag: tag });
     tag_html += footer_template();
     var tag_path = tag_dir + tag + '.html';
-    _fs2.default.writeFile(tag_path, tag_html);
+    _fs2.default.writeFile(tag_path, tag_html, writeFileCallback);
   });
 }
 
@@ -118,7 +118,7 @@ function renderPages() {
       });
       html += footer_template();
       var html_path = _path2.default.basename(page, '.hbs') + '.html';
-      _fs2.default.writeFile(html_path, html);
+      _fs2.default.writeFile(html_path, html, writeFileCallback);
     });
   });
 }
@@ -141,7 +141,7 @@ function renderIndex() {
     }
   });
   index += footer_template();
-  _fs2.default.writeFile('index.html', index);
+  _fs2.default.writeFile('index.html', index, writeFileCallback);
 }
 
 function renderPost(post) {
@@ -160,7 +160,7 @@ function renderPosts() {
       var post_path = 'posts/' + post.date;
       _mkpath2.default.sync(post_path);
       post_path = _path2.default.join(post_path, post.file) + '.html';
-      _fs2.default.writeFile(post_path, html);
+      _fs2.default.writeFile(post_path, html, writeFileCallback);
     }
   });
 }
@@ -181,7 +181,11 @@ function makeRSSFeed() {
     });
   });
   var xml = feed.xml();
-  _fs2.default.writeFile('./rss.xml', xml);
+  _fs2.default.writeFile('./rss.xml', xml, writeFileCallback);
+}
+
+function writeFileCallback(err, result) {
+  if (err) console.log('error', err);
 }
 
 function build(path) {
