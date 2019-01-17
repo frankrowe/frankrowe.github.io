@@ -1,0 +1,58 @@
+<style>
+  .notebook {
+    padding: 10px;
+    background: #EFF1F2;
+  }
+
+  #earthquake-container > div {
+    margin-bottom: 10px;
+  }
+  output {
+    display: inline-block;
+  }
+  form {
+    width: 50%;
+  }
+  form div {
+    font-size: 1rem !important;
+  }
+  input {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+  input[type=date] {
+    line-height: 16px;
+  }
+  input[type=range] {
+    display: inline-block;
+    width: auto;
+  }
+</style>
+<script type="module">
+  // Load the Observable runtime and inspector.
+  import { Runtime, Inspector } from "https://unpkg.com/@observablehq/notebook-runtime?module";
+
+  // Your notebook, compiled as an ES module.
+  import notebook from "https://api.observablehq.com/@frankrowe/earthquakes.js";
+
+  // Load the notebook, observing its cells with a default Inspector
+  // that simply renders the value of each cell into the provided DOM node.
+  //Inspector.into(document.getElementById("planet-observable-container"))
+  const render = ['intro', 'viewof magnitude', 'viewof time', 'mapCanvas', 'selected'];
+  render.forEach(function (name) {
+    let node = document.createElement('div');
+    node.setAttribute('id', 'earthquake-' + name);
+    document.getElementById('earthquake-container').appendChild(node);
+  })
+  Runtime.load(notebook, (cell) => {
+    if (render.indexOf(cell.name) >= 0) {
+      return new Inspector(document.getElementById('earthquake-' + cell.name));
+    } else {
+      // Force evaluation of all the other cells in the notebook.
+      return true;
+    }
+  });
+</script>
+<p><a href="https://beta.observablehq.com/@frankrowe/earthquakes">Link to Observable notebook</a></p>
+<div id="earthquake-container" class="notebook"></div>
