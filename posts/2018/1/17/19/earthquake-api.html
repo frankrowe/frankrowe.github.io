@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Planet API Explorer | frankrowe.org</title>
+  <title>Earthquake API | frankrowe.org</title>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.xml" />
@@ -39,11 +39,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12"><div id="25" class="post">
-  <h2><a href="/posts/2018/10/23/planet-api-explorer.html">Planet API Explorer</a></h2>
-  <p class="date">Oct 23, 2018
+      <div class="col-md-12"><div id="26" class="post">
+  <h2><a href="/posts/2018/1/17/19/earthquake-api.html">Earthquake API</a></h2>
+  <p class="date">Jan 17, 2018
     <span class="post-link">
-      <a href="/posts/2018/10/23/planet-api-explorer.html"><i class="fa fa-link"></i></a>
+      <a href="/posts/2018/1/17/19/earthquake-api.html"><i class="fa fa-link"></i></a>
     </span>
     <span class="tags">
         <a href="/tag/GIS.html">#GIS</a>
@@ -53,8 +53,10 @@
   <style>
   .notebook {
     padding: 10px;
+    background: #EFF1F2;
   }
-  #planet-container > div {
+
+  #earthquake-container > div {
     margin-bottom: 10px;
   }
   output {
@@ -84,28 +86,28 @@
   import { Runtime, Inspector } from "https://unpkg.com/@observablehq/notebook-runtime?module";
 
   // Your notebook, compiled as an ES module.
-  import notebook from "https://api.observablehq.com/@frankrowe/planet-api.js";
+  import notebook from "https://api.observablehq.com/@frankrowe/earthquakes.js";
 
   // Load the notebook, observing its cells with a default Inspector
   // that simply renders the value of each cell into the provided DOM node.
   //Inspector.into(document.getElementById("planet-observable-container"))
-  const render = ['intro', 'viewof item_type', 'viewof start_date', 'viewof end_date', 'viewof cloud_cover', 'summary', 'mapCanvas', 'selected'];
+  const render = ['intro', 'viewof magnitude', 'viewof time', 'mapCanvas', 'selected'];
   render.forEach(function (name) {
     let node = document.createElement('div');
-    node.setAttribute('id', 'planet-' + name);
-    document.getElementById('planet-container').appendChild(node);
+    node.setAttribute('id', 'earthquake-' + name);
+    document.getElementById('earthquake-container').appendChild(node);
   })
   Runtime.load(notebook, (cell) => {
     if (render.indexOf(cell.name) >= 0) {
-      return new Inspector(document.getElementById('planet-' + cell.name));
+      return new Inspector(document.getElementById('earthquake-' + cell.name));
     } else {
       // Force evaluation of all the other cells in the notebook.
       return true;
     }
   });
 </script>
-<p><a href="https://beta.observablehq.com/@frankrowe/planet-api">Link to Observable notebook</a></p>
-<div id="planet-container" class="notebook"></div>
+<p><a href="https://beta.observablehq.com/@frankrowe/earthquakes">Link to Observable notebook</a></p>
+<div id="earthquake-container" class="notebook"></div>
 </div>
 </div>
 </div>
