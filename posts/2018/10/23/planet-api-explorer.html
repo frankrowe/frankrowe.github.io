@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tags | frankrowe.org</title>
+    <title>Planet API Explorer | frankrowe.org</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.xml"/>
@@ -38,6 +38,70 @@
     </div>
       <div class="row">
         <div class="col-md-12">
+<div id="25" class="post">
+  <h2><a href="/posts/2018/10/23/planet-api-explorer.html">Planet API Explorer</a></h2>
+  <p class="date">Oct 23, 2018
+    <span class="post-link">
+      <a href="/posts/2018/10/23/planet-api-explorer.html"><i class="fa fa-link"></i></a>
+    </span>
+    <span class="tags">
+        <a href="/tag/GIS.html">#GIS</a>
+    </span>
+  </p>
+  <style>
+  #planet-container > div {
+    margin-bottom: 10px;
+  }
+  output {
+    display: inline-block;
+  }
+  form {
+    width: 50%;
+  }
+  form div {
+    font-size: 1rem !important;
+  }
+  input {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+  input[type=date] {
+    line-height: 16px;
+  }
+  input[type=range] {
+    display: inline-block;
+    width: auto;
+  }
+</style>
+<script type="module">
+  // Load the Observable runtime and inspector.
+  import { Runtime, Inspector } from "https://unpkg.com/@observablehq/notebook-runtime?module";
+
+  // Your notebook, compiled as an ES module.
+  import notebook from "https://api.observablehq.com/@frankrowe/planet-api.js";
+
+  // Load the notebook, observing its cells with a default Inspector
+  // that simply renders the value of each cell into the provided DOM node.
+  //Inspector.into(document.getElementById("planet-observable-container"))
+  const render = ['intro', 'viewof item_type', 'viewof start_date', 'viewof end_date', 'viewof cloud_cover', 'summary', 'mapCanvas', 'selected'];
+  render.forEach(function (name) {
+    let node = document.createElement('div');
+    node.setAttribute('id', name);
+    document.getElementById('planet-container').appendChild(node);
+  })
+  Runtime.load(notebook, (cell) => {
+    if (render.indexOf(cell.name) >= 0) {
+      return new Inspector(document.getElementById(cell.name));
+    } else {
+      // Force evaluation of all the other cells in the notebook.
+      return true;
+    }
+  });
+</script>
+<p><a href="https://beta.observablehq.com/@frankrowe/planet-api">Link to notebook</a></p>
+<div id="planet-container"></div>
+</div>
         </div>
       </div>
       <div class="row">
