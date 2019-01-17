@@ -114,8 +114,7 @@
     "file": "dynamic-legend",
     "published": true,
     "tags": ["js"],
-    "description":
-      "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>"
+    "description": "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>"
   },
   {
     "id": 14,
@@ -151,8 +150,7 @@
     "file": "spdcallsmap",
     "published": true,
     "tags": ["js", "map", "opendata", "opensource"],
-    "description":
-      "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
+    "description": "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
   },
   {
     "id": 18,
@@ -215,6 +213,15 @@
     "file": "basemap-selection-ui",
     "published": true,
     "tags": ["UI"],
+    "description": ""
+  },
+  {
+    "id": 25,
+    "date": "2018/10/23",
+    "title": "Planet API Explorer",
+    "file": "planet-api-explorer",
+    "published": true,
+    "tags": ["GIS"],
     "description": ""
   }
 ]
