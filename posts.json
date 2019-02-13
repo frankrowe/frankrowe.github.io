@@ -226,7 +226,7 @@
   },
   {
     "id": 26,
-    "date": "2018/1/17/19",
+    "date": "2018/1/17",
     "title": "USGS Earthquake API",
     "file": "earthquake-api",
     "published": true,
@@ -235,7 +235,7 @@
   },
   {
     "id": 27,
-    "date": "2018/2/11/19",
+    "date": "2019/2/13",
     "title": "When Spatial Search Goes Wrong",
     "file": "use-isochrones",
     "published": true,
