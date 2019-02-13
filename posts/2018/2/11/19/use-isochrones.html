@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>So Long | frankrowe.org</title>
+  <title>When Spatial Search Goes Wrong | frankrowe.org</title>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.xml" />
@@ -39,19 +39,33 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12"><div id="9" class="post">
-  <h2><a href="/posts/2015/02/25/so-long.html">So Long</a></h2>
-  <p class="date">Feb 25, 2015
+      <div class="col-md-12"><div id="27" class="post">
+  <h2><a href="/posts/2018/2/11/19/use-isochrones.html">When Spatial Search Goes Wrong</a></h2>
+  <p class="date">Feb 11, 2018
     <span class="post-link">
-      <a href="/posts/2015/02/25/so-long.html"><i class="fa fa-link"></i></a>
+      <a href="/posts/2018/2/11/19/use-isochrones.html"><i class="fa fa-link"></i></a>
     </span>
     <span class="tags">
-        <a href="/tag/misc.html">#misc</a>
+        <a href="/tag/GIS.html">#GIS</a>
     </span>
   </p>
-  <p style="text-align: center"><img src="/img/so-long.png" class="img-responsive"></p>
-<p>Today I pushed to master on <a href="http://esrgc.org">esrgc.org</a>, removing myself from the About page. It ends a five year long journey at the co-op. I learned so much in my time there, about programming and life in general. It was the perfect place to begin my career.</p>
-<p>For now,  I'll continue freelancing in the geospatial field. I'm going to focus on creating and contributing to open source tools and the open source community. My goal moving forward is simple and has not changed: to work on software that people want to use.</p>
+  <style>
+
+</style>
+
+<p>I want to find some great pizza near my city of Salisbury, Maryland. I do a search and put in 60 miles as my radius. I get a bunch of results:<img src="/img/isochrone1.png" class="img-responsive" width="400">Salisbury is on a peninsula, separated from western Maryland by the Chespeake Bay, with only one <a href="https://www.google.com/search?q=chesapeake+bay+bridge">way to cross</a>. Take a look at the pizzas on the left. They are across the Bay, and take hours to drive to.</p>
+
+<p>Instead of a simple buffer, we can create an <a href="https://en.wikipedia.org/wiki/Isochrone_map">isochrone</a>. An isochrone is a polygon of everywhere one can travel to within a certain time. An isochrone of 60 minutes for my city looks like this:<img src="/img/isochrone6.png" class="img-responsive" width="400"></p>
+
+<p>Now, I can do a query to get all the pizza joints that are contained within that isochrone polygon:<img src="/img/isochrone7.png" class="img-responsive" width="400"></p>
+
+<p>Good! These are more meaningful results.</p>
+
+<p>There are multiple ways to generate isochrones. The free and open source way is to use <a href="https://pgrouting.org/">PostGIS with pgrouting</a>. For this example, I used the <a href="https://docs.mapbox.com/api/navigation/#isochrone">Mapbox isochrone API</a> which is fast and easy.</p>
+
+<p>When your product requires these kind of search queries, think about the application before doing a simple buffer.</p>
+<p>Often users don't want results that are geographically close, they want results that are chronologically close.</p>
+
 </div>
 </div>
 </div>
