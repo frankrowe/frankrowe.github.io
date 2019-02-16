@@ -8,7 +8,6 @@ const _ = require('underscore');
 const RSS = require('rss');
 const getAnalytics = require('./analytics');
 const pkg = require('./package.json');
-let posts = require('./posts.json');
 
 const page_dir = './templates/pages/';
 const post_dir = './templates/posts/';
@@ -30,8 +29,8 @@ handlebars.registerHelper('version', block => {
   return pkg.version;
 });
 
-
 function getPosts() {
+  let posts = JSON.parse(fs.readFileSync('./posts.json'));
   var post_index = 1;
   posts.forEach(post => {
     post.display_date = moment(post.date, 'YYYY/MM/DD').format('YYYY-MM-DD');
@@ -45,6 +44,7 @@ function getPosts() {
     post.path = postPath;
   });
   posts.reverse();
+  return posts;
 }
 
 function getTags() {
@@ -89,7 +89,7 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function renderPages() {
+function renderPages(posts) {
   fs.readdir(page_dir, (err, files) => {
     files.forEach(page => {
       let title = capitalize(path.basename(page, '.hbs'));
@@ -114,7 +114,7 @@ function renderPage(page_path, data) {
   return html;
 }
 
-function renderIndex() {
+function renderIndex(posts) {
   let index = header_template({
     title: 'frankrowe.org',
   });
@@ -128,14 +128,16 @@ function renderIndex() {
 }
 
 function renderPost(post) {
-  post.content = fs.readFileSync(
-    path.join(post_dir, post.file + '.hbs'),
-    'utf8'
-  );
-  return renderPage('templates/includes/post.hbs', post);
+  return renderPage('templates/includes/post.hbs', {
+    ...post,
+    content: fs.readFileSync(
+      path.join(post_dir, post.file + '.hbs'),
+      'utf8'
+    )
+  });
 }
 
-function renderPosts() {
+function renderPosts(posts) {
   posts.forEach(post => {
     if (post.published) {
       let html = header_template({
@@ -151,7 +153,7 @@ function renderPosts() {
   });
 }
 
-function makeRSSFeed() {
+function makeRSSFeed(posts) {
   let feed = new RSS({
     title: 'frankrowe.org',
     site_url: 'http://frankrowe.org',
@@ -176,16 +178,18 @@ function writeFileCallback(err, result) {
   if (err) console.log('error', err);
 }
 
-async function build(path) {
+function savePosts(posts) {
+  fs.writeFile('./posts.json', JSON.stringify(posts.reverse(), null, 2), writeFileCallback);
+}
+
+async function build() {
   console.log('build');
-  getPosts();
-  posts = await getAnalytics(posts);
-  //getTags();
-  //renderTags();
-  renderPages();
-  renderIndex();
-  renderPosts();
-  makeRSSFeed();
+  const posts = await getAnalytics(getPosts());
+  renderPages(posts);
+  renderIndex(posts);
+  renderPosts(posts);
+  makeRSSFeed(posts);
+  savePosts(posts);
   // console.log('done');
   return;
 }

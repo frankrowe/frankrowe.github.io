@@ -2,19 +2,16 @@ const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 const _ = require('underscore');
-const serviceAccountJwt = require('./frankrowe org-60322bc2ff78.json');
+const keyPath = './frankrowe org-60322bc2ff78.json';
 
 function connect() {
   return new Promise((resolve, reject) => {
-
-    // scope is based on what is needed in our api
+    const serviceAccountJwt = JSON.parse(fs.readFileSync(keyPath));
     const scope = ['https://www.googleapis.com/auth/analytics'];
 
-    // create our client with the service account JWT
     const { client_email, private_key } = serviceAccountJwt;
     const client = new google.auth.JWT(client_email, null, private_key, scope, null);
 
-    // perform authorization and resolve with the client
     client.authorize((err) => {
       if (err) reject(err);
       else resolve(client);
@@ -74,10 +71,14 @@ function mapPageViews(rows, posts) {
 }
 
 async function run(posts) {
-  let client = await connect();
-  const filters = posts.map(mapToFilter);
-  const response = await getAnalytics(client, filters);
-  return mapPageViews(response.reports[0].data.rows, posts);
+  try {
+    let client = await connect();
+    const filters = posts.map(mapToFilter);
+    const response = await getAnalytics(client, filters);
+    return mapPageViews(response.reports[0].data.rows, posts);
+  } catch (e) {
+    return posts;
+  }
 }
 
 module.exports = run;
