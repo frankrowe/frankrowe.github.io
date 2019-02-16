@@ -43,7 +43,6 @@ function getPosts() {
     postPath = path.join(postPath, post.file) + '.html';
     post.path = postPath;
   });
-  posts.reverse();
   return posts;
 }
 
@@ -97,7 +96,7 @@ function renderPages(posts) {
         title: title + ' | frankrowe.org',
       });
       html += renderPage(path.join(page_dir, page), {
-        posts: posts,
+        posts: posts.slice().reverse(),
       });
       html += footer_template();
       let html_path = path.basename(page, '.hbs') + '.html';
@@ -118,7 +117,7 @@ function renderIndex(posts) {
   let index = header_template({
     title: 'frankrowe.org',
   });
-  posts.forEach((post, idx) => {
+  posts.slice().reverse().forEach((post, idx) => {
     if (post.published && idx < 10) {
       index += renderPost(post);
     }
@@ -160,14 +159,14 @@ function makeRSSFeed(posts) {
     description:
       'The personal blog of Frank Rowe, an independent web and GIS developer located on the Eastern Shore of Maryland.',
   });
-  _.first(posts, 5).forEach(post => {
+  _.last(posts, 5).forEach(post => {
     feed.item({
       title: post.title,
       description: post.description,
       url:
         'http://frankrowe.org/posts/' + post.date + '/' + post.file + '.html',
       guid: post.id,
-      date: moment(post.date, 'YYYY/MM/DD'),
+      date: moment(post.date, 'YYYY-MM-DD'),
     });
   });
   let xml = feed.xml();
@@ -179,12 +178,13 @@ function writeFileCallback(err, result) {
 }
 
 function savePosts(posts) {
-  fs.writeFile('./posts.json', JSON.stringify(posts.reverse(), null, 2), writeFileCallback);
+  fs.writeFile('./posts.json', JSON.stringify(posts, null, 2), writeFileCallback);
 }
 
 async function build() {
   console.log('build');
   const posts = await getAnalytics(getPosts());
+  console.log(posts[0])
   renderPages(posts);
   renderIndex(posts);
   renderPosts(posts);
