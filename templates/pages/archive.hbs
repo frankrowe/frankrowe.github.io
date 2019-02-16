@@ -5,11 +5,16 @@
   {{/each}}
   <h3>All Posts</h3>
   <table class="archive">
+    <thead>
+      <th></th>
+      <th></th>
+      <th style="text-align: right;">Reads</th>
+    </thead>
   <tbody>
   {{#each posts}}
     <tr>
     {{#if published}}
-    <td>{{ post_index }}<td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td>{{ display_date }}</td>
+    <td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td>{{ display_date }}</td><td>{{ pageViews }}</td>
     {{/if}}
     </tr>
   {{/each}}

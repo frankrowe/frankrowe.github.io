@@ -1,13 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import { exec } from 'child_process';
-import mkpath from 'mkpath';
-import { handlebars } from 'hbs';
-import moment from 'moment';
-import _ from 'underscore';
-import RSS from 'rss';
-import pkg from './package.json';
-import posts from './posts.json';
+const fs = require('fs');
+const path = require('path');
+const { exec } = require('child_process');
+const mkpath = require('mkpath');
+const { handlebars } = require('hbs');
+const moment = require('moment');
+const _ = require('underscore');
+const RSS = require('rss');
+const getAnalytics = require('./analytics');
+const pkg = require('./package.json');
+let posts = require('./posts.json');
 
 const page_dir = './templates/pages/';
 const post_dir = './templates/posts/';
@@ -29,6 +30,7 @@ handlebars.registerHelper('version', block => {
   return pkg.version;
 });
 
+
 function getPosts() {
   var post_index = 1;
   posts.forEach(post => {
@@ -37,6 +39,10 @@ function getPosts() {
       post.post_index = post_index;
       post_index++;
     }
+
+    let postPath = '/posts/' + post.date;
+    postPath = path.join(postPath, post.file) + '.html';
+    post.path = postPath;
   });
   posts.reverse();
 }
@@ -170,16 +176,18 @@ function writeFileCallback(err, result) {
   if (err) console.log('error', err);
 }
 
-function build(path) {
+async function build(path) {
   console.log('build');
   getPosts();
+  posts = await getAnalytics(posts);
+  console.log(posts);
   getTags();
   renderTags();
   renderPages();
   renderIndex();
   renderPosts();
   makeRSSFeed();
-  console.log('done');
+  // console.log('done');
   return;
 }
 
