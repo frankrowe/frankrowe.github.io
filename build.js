@@ -180,8 +180,8 @@ async function build(path) {
   console.log('build');
   getPosts();
   posts = await getAnalytics(posts);
-  getTags();
-  renderTags();
+  //getTags();
+  //renderTags();
   renderPages();
   renderIndex();
   renderPosts();
