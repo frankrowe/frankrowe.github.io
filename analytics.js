@@ -47,7 +47,6 @@ async function getAnalytics(client, filters) {
       }],
     },
   });
-  console.log(JSON.stringify(res.data));
   return res.data;
 }
 

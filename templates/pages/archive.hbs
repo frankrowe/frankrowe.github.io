@@ -1,12 +1,7 @@
 <div class="post archive">
-  <h3>All Tags</h3>
-  {{#each alltags}}
-    <a href="/tag/{{tag}}.html">#{{tag}}</a>
-  {{/each}}
-  <h3>All Posts</h3>
   <table class="archive">
     <thead>
-      <th></th>
+      <th>All Posts</th>
       <th></th>
       <th style="text-align: right;">Reads</th>
     </thead>
@@ -14,10 +9,11 @@
   {{#each posts}}
     <tr>
     {{#if published}}
-    <td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td>{{ display_date }}</td><td>{{ pageViews }}</td>
+    <td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td style="color: #ababab">{{ display_date }}</td><td style="color: #ababab">{{ pageViews }}</td>
     {{/if}}
     </tr>
   {{/each}}
   </tbody>
   </table>
+
 </div>

@@ -30,10 +30,8 @@
           <div class="title"><a href="/">A blog about web mapping.</a></div>
           <ul class="navigation">
             <li><a href="/">frankrowe.org</a></li>
-            <li><a href="/archive.html">Archive</a></li>
+            <li><a href="/archive.html">All Posts</a></li>
             <li><a href="/about.html">About</a></li>
-            <li><a href="https://twitter.com/fsrowe">Twitter</a></li>
-            <li><a href="https://github.com/frankrowe">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -41,16 +39,7 @@
     <div class="row">
       <div class="col-md-12"><div id="21" class="post">
   <h2><a href="/posts/2016/03/15/iso-attribute-table.html">Using React&#x27;s FixedDataTable as an Attribute Table</a></h2>
-  <p class="date">Mar 15, 2016
-    <span class="post-link">
-      <a href="/posts/2016/03/15/iso-attribute-table.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/GIS.html">#GIS</a>
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/opensource.html">#opensource</a>
-    </span>
-  </p>
+  <p class="date">2016-03-15</p>
   <p class="text-center"><img src="/img/iso-attribute-table.gif" class="img-responsive"></p>
 <p>I just updated <a href="http://frankrowe.org/iso/">iso</a> to React 0.14.7 after not being able to work on it for a few months. Turns out, React has changed a lot in that time, including <a href="http://facebook.github.io/fixed-data-table/">FixedDataTable</a>, a popular React component for making better tables.</p>
 <p>It is perfect for something like an Attribute Table in GIS, because there are an unknown number of columns/rows when displaying random data. FixedDataTable supports a fixed header row to make scrolling easier, fixed columns (good for an index column in this application), and column resizing. It also adds nice hooks for row clicking, so we can update the data model to select features on click.</p>

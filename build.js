@@ -34,7 +34,7 @@ handlebars.registerHelper('version', block => {
 function getPosts() {
   var post_index = 1;
   posts.forEach(post => {
-    post.display_date = moment(post.date, 'YYYY/MM/DD').format('MMM DD, YYYY');
+    post.display_date = moment(post.date, 'YYYY/MM/DD').format('YYYY-MM-DD');
     if (post.published) {
       post.post_index = post_index;
       post_index++;
@@ -180,7 +180,6 @@ async function build(path) {
   console.log('build');
   getPosts();
   posts = await getAnalytics(posts);
-  console.log(posts);
   getTags();
   renderTags();
   renderPages();

@@ -1,14 +1,5 @@
 <div id="{{id}}" class="post">
-  <h2><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></h2>
-  <p class="date">{{ display_date }}
-    <span class="post-link">
-      <a href="/posts/{{ date }}/{{ file }}.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-      {{#each tags}}
-        <a href="/tag/{{.}}.html">#{{.}}</a>
-      {{/each}}
-    </span>
-  </p>
+  <h2><a href="{{path}}">{{ title }}</a></h2>
+  <p class="date">{{ display_date }}</p>
   {{{ content }}}
 </div>
