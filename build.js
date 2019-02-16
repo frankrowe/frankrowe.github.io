@@ -184,7 +184,6 @@ function savePosts(posts) {
 async function build() {
   console.log('build');
   const posts = await getAnalytics(getPosts());
-  console.log(posts[0])
   renderPages(posts);
   renderIndex(posts);
   renderPosts(posts);
