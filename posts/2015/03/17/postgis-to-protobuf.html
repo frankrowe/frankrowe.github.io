@@ -30,10 +30,8 @@
           <div class="title"><a href="/">A blog about web mapping.</a></div>
           <ul class="navigation">
             <li><a href="/">frankrowe.org</a></li>
-            <li><a href="/archive.html">Archive</a></li>
+            <li><a href="/archive.html">All Posts</a></li>
             <li><a href="/about.html">About</a></li>
-            <li><a href="https://twitter.com/fsrowe">Twitter</a></li>
-            <li><a href="https://github.com/frankrowe">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -41,16 +39,7 @@
     <div class="row">
       <div class="col-md-12"><div id="10" class="post">
   <h2><a href="/posts/2015/03/17/postgis-to-protobuf.html">PostGIS to Protobuf (with vector tiles)</a></h2>
-  <p class="date">Mar 17, 2015
-    <span class="post-link">
-      <a href="/posts/2015/03/17/postgis-to-protobuf.html"><i class="fa fa-link"></i></a>
-    </span>
-    <span class="tags">
-        <a href="/tag/js.html">#js</a>
-        <a href="/tag/GIS.html">#GIS</a>
-        <a href="/tag/PostGIS.html">#PostGIS</a>
-    </span>
-  </p>
+  <p class="date">2015-03-17</p>
   <p style="text-align: center"><img src="/img/vector-tiles.jpg" class="img-responsive"></p>
 <p>I have seen a lot of talk about <a href="https://github.com/google/protobuf/">protobol buffers</a> and <a href="https://www.mapbox.com/developers/vector-tiles/">vector tiles</a> recently, which promises improved performance loading and rendering layers than just plain geojson. I've seen a lot of demos of the tech, but had trouble putting it all together. This is my first attempt at creating a server that will query PostGIS, serve vector tiles encoded into protobuf, and render them on a Leaflet map.</p>
 <p>Create a layer in Leaflet, using the excellent <a href="https://github.com/SpatialServer/Leaflet.MapboxVectorTile">Leaflet.MapboxVectorTile</a> plugin.</p>
