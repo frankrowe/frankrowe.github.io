@@ -138,6 +138,7 @@ ul.navigation li:last-child {
   margin: 0 auto;
   padding: 10px 0 10px 0;
   text-align: center;
+  max-width: 100%;
 }
 
 .post .img-group {
@@ -304,6 +305,7 @@ table.archive td:last-child {
   padding: 10px;
   margin: 10px;
   background: #eff1f2;
+  word-break: break-all;
 }
 
 @media (prefers-color-scheme: light) {
