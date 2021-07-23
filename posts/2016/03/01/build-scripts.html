@@ -9,8 +9,9 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.xml" />
-  <link rel="stylesheet" href="/css/github.css">
-  <link rel="stylesheet" href="/css/style.css?v=1.0.453">
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.0.477">
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -46,7 +47,6 @@
 <p>Not only do you not need to install/maintain/update grunt, you don't need any of the grunt plugins. Instead of installing and updating grunt-browserify, grunt-less, etc, you just install the actual browserify package. You've just cut your dependencies in half.</p>
 <p>Above is an example of what I use for a project with React, ES2015, and Less. I use <a href="https://github.com/substack/node-browserify">browserify</a> with a <a href="https://github.com/babel/babelify">babelify</a> transform to package my js + jsx modules, and <a href="https://github.com/substack/watchify">watchify</a> to do the same on file changes. I use <a href="https://github.com/less/less.js">less</a> to compile css from my main.less file, from which I import all other less files. <a href="https://github.com/Qard/onchange">onchange</a> enables us to watch for changes in your less files. You can then run <code>npm run build</code> to build your css/js, and <code>npm run watch</code> to recompile on changes during development.</p>
 <p><a href="https://docs.npmjs.com/misc/scripts">npm-scripts</a> has lots of nice built in scripts and pre and post hooks that you can take advantage of. Bottom line, it's better to take advantage of your already existing package.json than add an entire new dependency to your project.</p>
-
 </div>
 
   </div>
@@ -60,8 +60,8 @@
   </div>
 </div>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script> 
 </body>
 
 </html>
