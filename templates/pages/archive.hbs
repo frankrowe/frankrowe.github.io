@@ -2,14 +2,13 @@
   <table class="archive">
     <thead>
       <th>All Posts</th>
-      <th></th>
-      <th style="text-align: right;">Reads</th>
+      <th style="text-align: right;"></th>
     </thead>
   <tbody>
   {{#each posts}}
     <tr>
     {{#if published}}
-    <td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td style="color: #ababab">{{ display_date }}</td><td style="color: #ababab">{{ pageViews }}</td>
+    <td><a href="/posts/{{ date }}/{{ file }}.html">{{ title }}</a></td><td class="date">{{ display_date }}</td>
     {{/if}}
     </tr>
   {{/each}}
