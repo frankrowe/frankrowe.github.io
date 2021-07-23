@@ -15,7 +15,6 @@ body {
 
 p {
   line-height: 24px;
-  color: #333;
 }
 
 pre {
@@ -298,4 +297,28 @@ td {
 .footer p {
   margin: 0;
   line-height: 18px;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+      background-color: white;
+      color: #333333;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+      background-color: #333333;
+      color: white;
+  }
+  header a {
+    color: white;
+  }
+  .contact-bar .title a {
+    color: white;
+  }
+  .post h2 a {
+    color: white;
+  }
+  
 }
