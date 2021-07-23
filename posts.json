@@ -1,18 +1,13 @@
 [
   {
-    "id": 1,
     "date": "2014/07/23",
     "title": "A Programmer's Best Friends",
     "file": "programmers-best-friend",
     "published": false,
     "tags": [],
-    "description": "",
-    "display_date": "2014-07-23",
-    "path": "/posts/2014/07/23/programmers-best-friend.html",
-    "pageViews": 0
+    "description": ""
   },
   {
-    "id": 2,
     "date": "2014/07/24",
     "title": "Map Rendering with TileMill and Amazon EC2",
     "file": "cloud-render",
@@ -20,40 +15,25 @@
     "tags": [
       "GIS"
     ],
-    "description": "",
-    "display_date": "2014-07-24",
-    "post_index": 1,
-    "path": "/posts/2014/07/24/cloud-render.html",
-    "pageViews": 10,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 3,
     "date": "2014/07/24",
     "title": "Documenting TileMill's project.mml",
     "file": "tilemill-project",
     "published": false,
     "tags": [],
-    "description": "",
-    "display_date": "2014-07-24",
-    "path": "/posts/2014/07/24/tilemill-project.html",
-    "pageViews": 0
+    "description": ""
   },
   {
-    "id": 4,
     "date": "2014/07/24",
     "title": "Live Map Scales with D3.js",
     "file": "d3-map-scales",
     "published": false,
     "tags": [],
-    "description": "",
-    "display_date": "2014-07-24",
-    "path": "/posts/2014/07/24/d3-map-scales.html",
-    "pageViews": 0
+    "description": ""
   },
   {
-    "id": 5,
     "date": "2014/08/15",
     "title": "GeoDash",
     "file": "geodash",
@@ -63,16 +43,9 @@
       "dataviz",
       "opensource"
     ],
-    "description": "",
-    "display_date": "2014-08-15",
-    "post_index": 2,
-    "path": "/posts/2014/08/15/geodash.html",
-    "pageViews": 8,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 6,
     "date": "2014/12/02",
     "title": "Leaflet Crosshairs",
     "file": "leaflet-crosshairs",
@@ -82,16 +55,9 @@
       "js",
       "opensource"
     ],
-    "description": "",
-    "display_date": "2014-12-02",
-    "post_index": 3,
-    "path": "/posts/2014/12/02/leaflet-crosshairs.html",
-    "pageViews": 54,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 7,
     "date": "2014/12/04",
     "title": "Improved GeoDash Interaction",
     "file": "better-chart-hover",
@@ -101,16 +67,9 @@
       "dataviz",
       "opensource"
     ],
-    "description": "",
-    "display_date": "2014-12-04",
-    "post_index": 4,
-    "path": "/posts/2014/12/04/better-chart-hover.html",
-    "pageViews": 7,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 8,
     "date": "2015/01/17",
     "title": "Maryland in GeoJSON",
     "file": "maryland-geojson",
@@ -119,16 +78,9 @@
       "GIS",
       "opensource"
     ],
-    "description": "",
-    "display_date": "2015-01-17",
-    "post_index": 5,
-    "path": "/posts/2015/01/17/maryland-geojson.html",
-    "pageViews": 13,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 9,
     "date": "2015/02/25",
     "title": "So Long",
     "file": "so-long",
@@ -136,16 +88,9 @@
     "tags": [
       "misc"
     ],
-    "description": "",
-    "display_date": "2015-02-25",
-    "post_index": 6,
-    "path": "/posts/2015/02/25/so-long.html",
-    "pageViews": 6,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 10,
     "date": "2015/03/17",
     "title": "PostGIS to Protobuf (with vector tiles)",
     "file": "postgis-to-protobuf",
@@ -155,16 +100,9 @@
       "GIS",
       "PostGIS"
     ],
-    "description": "",
-    "display_date": "2015-03-17",
-    "post_index": 7,
-    "path": "/posts/2015/03/17/postgis-to-protobuf.html",
-    "pageViews": 588,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 11,
     "date": "2015/05/04",
     "title": "Simplify a GeoJSON file in iso",
     "file": "iso-simplify",
@@ -173,14 +111,9 @@
       "js",
       "GIS"
     ],
-    "description": "",
-    "display_date": "2015-05-04",
-    "post_index": 8,
-    "path": "/posts/2015/05/04/iso-simplify.html",
-    "pageViews": 10
+    "description": ""
   },
   {
-    "id": 12,
     "date": "2015/08/28",
     "title": "HotPlate",
     "file": "hotplate",
@@ -188,14 +121,9 @@
     "tags": [
       "misc"
     ],
-    "description": "",
-    "display_date": "2015-08-28",
-    "post_index": 9,
-    "path": "/posts/2015/08/28/hotplate.html",
-    "pageViews": 5
+    "description": ""
   },
   {
-    "id": 13,
     "date": "2015/09/04",
     "title": "Creating a Dynamic Legend",
     "file": "dynamic-legend",
@@ -203,14 +131,9 @@
     "tags": [
       "js"
     ],
-    "description": "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>",
-    "display_date": "2015-09-04",
-    "post_index": 10,
-    "path": "/posts/2015/09/04/dynamic-legend.html",
-    "pageViews": 6
+    "description": "<p>A technical description of how to create a map legend that shows only layers that have data in the current map view.</p>"
   },
   {
-    "id": 14,
     "date": "2015/10/12",
     "title": "3D Touch Map Zooming",
     "file": "3d-touch",
@@ -218,14 +141,9 @@
     "tags": [
       "js"
     ],
-    "description": "<p>How to zoom a web map using 3D Touch APIs in JavaScript.</p>",
-    "display_date": "2015-10-12",
-    "post_index": 11,
-    "path": "/posts/2015/10/12/3d-touch.html",
-    "pageViews": 7
+    "description": "<p>How to zoom a web map using 3D Touch APIs in JavaScript.</p>"
   },
   {
-    "id": 15,
     "date": "2015/10/15",
     "title": "Tracking Mary Lee",
     "file": "marylee",
@@ -236,14 +154,9 @@
       "opendata",
       "opensource"
     ],
-    "description": "<p>A quick map showing the track of the great white shark Mary Lee.</p>",
-    "display_date": "2015-10-15",
-    "post_index": 12,
-    "path": "/posts/2015/10/15/marylee.html",
-    "pageViews": 19
+    "description": "<p>A quick map showing the track of the great white shark Mary Lee.</p>"
   },
   {
-    "id": 16,
     "date": "2015/10/29",
     "title": "More 3D Touch Experiments: Drawing a Buffer",
     "file": "3dtouchbuffer",
@@ -251,14 +164,9 @@
     "tags": [
       "js"
     ],
-    "description": "<p>Drawing a buffered area on a web map using 3D Touch APIs in JavaScript.</p>",
-    "display_date": "2015-10-29",
-    "post_index": 13,
-    "path": "/posts/2015/10/29/3dtouchbuffer.html",
-    "pageViews": 4
+    "description": "<p>Drawing a buffered area on a web map using 3D Touch APIs in JavaScript.</p>"
   },
   {
-    "id": 17,
     "date": "2015/12/07",
     "title": "Salisbury Police Daily Calls Map",
     "file": "spdcallsmap",
@@ -269,14 +177,9 @@
       "opendata",
       "opensource"
     ],
-    "description": "<p>A quick map made using open data from the Salisbury, MD police department.</p>",
-    "display_date": "2015-12-07",
-    "post_index": 14,
-    "path": "/posts/2015/12/07/spdcallsmap.html",
-    "pageViews": 10
+    "description": "<p>A quick map made using open data from the Salisbury, MD police department.</p>"
   },
   {
-    "id": 18,
     "date": "2016/02/09",
     "title": "location-bar: GPS coordinates in your menu bar",
     "file": "location-bar",
@@ -286,16 +189,9 @@
       "GIS",
       "opensource"
     ],
-    "description": "<p>Display your current GPS coordinates in your OS X menu bar.</p>",
-    "display_date": "2016-02-09",
-    "post_index": 15,
-    "path": "/posts/2016/02/09/location-bar.html",
-    "pageViews": 5,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": "<p>Display your current GPS coordinates in your OS X menu bar.</p>"
   },
   {
-    "id": 19,
     "date": "2016/03/01",
     "title": "npm-scripts > grunt",
     "file": "build-scripts",
@@ -305,16 +201,9 @@
       "css",
       "dev"
     ],
-    "description": "<p>Why npm-scripts is better than grunt/gulp for running build scripts.</p>",
-    "display_date": "2016-03-01",
-    "post_index": 16,
-    "path": "/posts/2016/03/01/build-scripts.html",
-    "pageViews": 4,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": "<p>Why npm-scripts is better than grunt/gulp for running build scripts.</p>"
   },
   {
-    "id": 20,
     "date": "2016/03/04",
     "title": "A new take on some QGIS icons",
     "file": "qgis-icons",
@@ -323,16 +212,9 @@
       "GIS",
       "design"
     ],
-    "description": "<p>A new take on QGIS icons</p>",
-    "display_date": "2016-03-04",
-    "post_index": 17,
-    "path": "/posts/2016/03/04/qgis-icons.html",
-    "pageViews": 5,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": "<p>A new take on QGIS icons</p>"
   },
   {
-    "id": 21,
     "date": "2016/03/15",
     "title": "Using React's FixedDataTable as an Attribute Table",
     "file": "iso-attribute-table",
@@ -342,16 +224,9 @@
       "js",
       "opensource"
     ],
-    "description": "<p>Using React's FixedDataTable as an Attribute Table</p>",
-    "display_date": "2016-03-15",
-    "post_index": 18,
-    "path": "/posts/2016/03/15/iso-attribute-table.html",
-    "pageViews": 16,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": "<p>Using React's FixedDataTable as an Attribute Table</p>"
   },
   {
-    "id": 22,
     "date": "2016/05/05",
     "title": "PostGIS to Vector Tiles (with OpenLayers)",
     "file": "postgistovector",
@@ -362,13 +237,9 @@
       "PostGIS",
       "openlayers"
     ],
-    "description": "",
-    "display_date": "2016-05-05",
-    "path": "/posts/2016/05/05/postgistovector.html",
-    "pageViews": 339
+    "description": ""
   },
   {
-    "id": 23,
     "date": "2016/05/24",
     "title": "Build a cross platform module for React and React Native",
     "file": "cross-platform-modules",
@@ -376,16 +247,9 @@
     "tags": [
       "js"
     ],
-    "description": "",
-    "display_date": "2016-05-24",
-    "post_index": 19,
-    "path": "/posts/2016/05/24/cross-platform-modules.html",
-    "pageViews": 110,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 24,
     "date": "2018/01/30",
     "title": "Basemap Selector UIs for Mobile Apps",
     "file": "basemap-selection-ui",
@@ -394,16 +258,9 @@
       "UI",
       "GIS"
     ],
-    "description": "",
-    "display_date": "2018-01-30",
-    "post_index": 20,
-    "path": "/posts/2018/01/30/basemap-selection-ui.html",
-    "pageViews": 104,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 25,
     "date": "2018/10/23",
     "title": "Planet API Explorer",
     "file": "planet-api-explorer",
@@ -412,16 +269,9 @@
       "GIS",
       "Observable"
     ],
-    "description": "",
-    "display_date": "2018-10-23",
-    "post_index": 21,
-    "path": "/posts/2018/10/23/planet-api-explorer.html",
-    "pageViews": 3,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 26,
     "date": "2018/1/17",
     "title": "USGS Earthquake API",
     "file": "earthquake-api",
@@ -430,16 +280,9 @@
       "GIS",
       "Observable"
     ],
-    "description": "",
-    "display_date": "2018-01-17",
-    "post_index": 22,
-    "path": "/posts/2018/1/17/earthquake-api.html",
-    "pageViews": 1,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   },
   {
-    "id": 27,
     "date": "2019/2/13",
     "title": "When Spatial Search Goes Wrong",
     "file": "use-isochrones",
@@ -447,12 +290,6 @@
     "tags": [
       "GIS"
     ],
-    "description": "",
-    "display_date": "2019-02-13",
-    "post_index": 23,
-    "path": "/posts/2019/2/13/use-isochrones.html",
-    "pageViews": 19,
-    "filename": "templates/includes/post.hbs",
-    "alltags": []
+    "description": ""
   }
 ]

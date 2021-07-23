@@ -7,10 +7,11 @@ body {
 body {
   color: #333;
   font-size: 16px;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   font-weight: 300;
   background: #ffffff;
+  margin: 0;
 }
 
 p {
@@ -24,7 +25,7 @@ pre {
 }
 
 .container {
-  padding-bottom: 60px;
+  padding: 0 15px 60px 15px;
 }
 a {
   text-decoration: none;
@@ -67,7 +68,6 @@ header a {
 }
 
 .contact-bar {
-  overflow: hidden;
   max-width: 720px;
   margin: 20px auto;
 }
@@ -80,7 +80,6 @@ header a {
 .contact-bar ul.navigation {
   float: right;
   list-style: none;
-  margin-bottom: 0px;
   padding: 0 0 0 20px;
   text-align: right;
 }
@@ -94,18 +93,21 @@ header a {
   }
 }
 
-.contact-bar .title {
-  float: left;
-  padding-left: 30px;
-  font-weight: bold;
+.contact-bar h5 {
+  margin: 16px 0 16px 16px;
+  display: inline-block;
 }
 
-.contact-bar .title a {
+.contact-bar h5 a {
   color: #333;
 }
 
-.contact-bar .title a:hover {
+.contact-bar h5 a:hover {
   text-decoration: none;
+}
+
+ul.navigation {
+  margin: 16px 0 16px 0;
 }
 
 ul.navigation li {
@@ -118,8 +120,6 @@ ul.navigation li:last-child {
 }
 
 .marker {
-  position: absolute;
-  top: 15px;
 }
 
 .marker img {
@@ -134,8 +134,18 @@ ul.navigation li:last-child {
 }
 
 .post img {
+  display: block;
   margin: 0 auto;
+  padding: 10px 0 10px 0;
   text-align: center;
+}
+
+.post .img-group {
+  text-align: center;
+}
+
+.post .img-group img {
+  display: inline-block;
 }
 
 .post h2 {
@@ -157,6 +167,13 @@ ul.navigation li:last-child {
   color: #aaa;
 }
 
+.date {
+  font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+    'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
+    monospace;
+}
+
 .post-link {
   color: #058145;
   font-size: 16px;
@@ -168,7 +185,6 @@ ul.navigation li:last-child {
 
 table.archive {
   width: 100%;
-  color: rgb(81, 96, 102);
 }
 
 table.archive td,
@@ -284,26 +300,35 @@ table.archive td:last-child {
   line-height: 18px;
 }
 
+.notebook {
+  padding: 10px;
+  margin: 10px;
+  background: #eff1f2;
+}
+
 @media (prefers-color-scheme: light) {
   body {
-      background-color: white;
-      color: #333333;
+    background-color: white;
+    color: #333333;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-      background-color: #333333;
-      color: white;
+    background-color: #333333;
+    color: white;
   }
   header a {
     color: white;
   }
-  .contact-bar .title a {
+  .contact-bar h5 a {
     color: white;
   }
   .post h2 a {
     color: white;
   }
-  
+
+  .notebook {
+    background: #404040;
+  }
 }
