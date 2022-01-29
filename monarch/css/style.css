@@ -1,0 +1,222 @@
+html,
+body {
+  background-color: #101113;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  padding: 64px;
+  background-image: url('../img/map2.png');
+  background-position: 13% 20%;
+  background-repeat: no-repeat;
+  background-size: 466px;
+}
+
+h1 {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 23px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 23px;
+}
+h3 {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 17px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 23px;
+}
+p,
+a,
+button {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23px;
+}
+blockquote {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 17px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23px;
+}
+pre {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23px;
+}
+
+.btn-primary {
+  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #000;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 12px 42px;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background-color: #f6f6f6;
+}
+.btn-primary:active {
+  position: relative;
+  top: 1px;
+}
+
+.btn-secondary {
+  border-radius: 6px;
+  background: linear-gradient(black, black) padding-box,
+    linear-gradient(to right, #fbf300, #fb8122) border-box;
+  border: 2px solid transparent;
+  color: white;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 42px;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background-color: #f6f6f6;
+}
+.btn-secondary:active {
+  position: relative;
+  top: 1px;
+}
+
+#topbar {
+  box-sizing: border-box;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+
+  justify-content: space-between;
+}
+
+#topbar h1 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+#topbar h1 img {
+  margin-right: 8px;
+}
+
+.topbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px;
+}
+.topbar-links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  display: inline-block;
+  margin-right: 16px;
+  text-decoration: none;
+}
+
+.topbar-social {
+  display: flex;
+  align-items: center;
+}
+
+#intro {
+  border: 0px solid red;
+  width: 450px;
+  margin-top: 128px;
+  float: left;
+  z-index: 9999;
+}
+
+#intro h3 {
+  color: #fff;
+  font-size: 64px;
+  line-height: 75px;
+  font-weight: normal;
+  margin: 0;
+}
+
+#intro h3 .gradient {
+  background: #fbf300;
+  background: -webkit-linear-gradient(
+    to right,
+    #fffcfc 0%,
+    #fbf300 20%,
+    #fb8122 80%,
+    #fffcfc 100%
+  );
+  background: -moz-linear-gradient(
+    to right,
+    #fbf300 0%,
+    #fb8122 83%,
+    #fffcfc 100%
+  );
+  background: linear-gradient(
+    to right,
+    #fffcfc 0%,
+    #fbf300 20%,
+    #fb8122 50%,
+    #fbf300 80%,
+    #fffcfc 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#intro h3 .gradient2 {
+  background: #fbf300;
+  background: -webkit-linear-gradient(
+    to right,
+    #fffcfc 0%,
+    #fbf300 20%,
+    #fb8122 80%,
+    #fffcfc 100%
+  );
+  background: -moz-linear-gradient(
+    to right,
+    #fbf300 0%,
+    #fb8122 83%,
+    #fffcfc 100%
+  );
+  background: linear-gradient(to right, #fbf300 0%, #fb8122 50%, #fbf300 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#intro p {
+  color: white;
+}
+
+#app-demo {
+  border: 0px solid red;
+  margin-top: 64px;
+  position: absolute;
+  right: 0px;
+}
