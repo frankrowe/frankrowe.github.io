@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>TEST</title>
+  <style>
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #iw {
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="map"></div>
+
+</body>
+<script>
+  function initMap() {
+    let selected = false;
+    const map = new window.google.maps.Map(document.getElementById('map'), {
+      center: { lat: 39.1, lng: -76.6 },
+      zoom: 10,
+      mapId: 'e09c2ab8d8b246f2'
+    });
+
+    const overlay = new deck.GoogleMapsOverlay({
+      layers: [
+        new deck.MVTLayer({
+          data: 'https://tileserv-demo.centurygeo.com/ramp.inventory/{z}/{x}/{y}.pbf',
+          pointType: 'circle',
+          stroked: true,
+          getPointRadius: 4,
+          pointRadiusUnits: 'pixels',
+          lineWidthUnits: 'pixels',
+          getFillColor: (a, b) => {
+            return a.properties.status === 'Fail' ? [255, 0, 255] : [0, 255, 0];
+          },
+          pickable: true,
+          onClick: e => {
+            const infowindow = new google.maps.InfoWindow({
+              content: `<div id="iw"><table>${Object.keys(e.object.properties).map(key => `<tr><td><b>${key}</b></td><td>${e.object.properties[key]}</td></tr>`)}</table></div>`,
+              position: { lat: e.coordinate[1], lng: e.coordinate[0] }
+            });
+            infowindow.open(map);
+          },
+          onHover: (e, b) => {
+            if (e.object) {
+              const isSelected = selected === e.object.properties.fulcrum_id
+              if (isSelected) {
+                map.setOptions({ draggableCursor: 'grab' });
+                selected = false;
+              } else {
+                map.setOptions({ draggableCursor: 'pointer' });
+                selected = e.object.properties.fulcrum_id;
+              }
+            } else {
+              map.setOptions({ draggableCursor: 'grab' });
+              selected = false;
+            }
+          }
+        })
+      ]
+    });
+    overlay.setMap(map);
+  }
+</script>
+<script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSP1HImyC-J6wr8MMrwOOc2bv4q7gDnqc&callback=initMap"></script>
+
+</html>
