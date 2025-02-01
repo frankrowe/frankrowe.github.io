@@ -60,6 +60,31 @@
             attribution: '&copy; Your Name or Source'
         }).addTo(map);
 
+        // add a geojson layer from a url
+        fetch('./wetlandlines.geojson')
+            .then(response => response.json())
+            .then(data => {
+                var wetlandlines = L.geoJSON(data).addTo(map);
+
+                // zoom the map to the geojson layer
+                map.fitBounds(L.geoJSON(data).getBounds());
+
+                // Define base layers
+                var baseLayers = {
+                    "Satellite": satellite,
+                    
+                };
+
+                // Define overlay layers
+                var overlayLayers = {
+                    "1ft Contour Lines": tileLayer,
+                    "Wetland Lines": wetlandlines,
+                };
+
+                // Add layer control to the map
+                L.control.layers(baseLayers, overlayLayers).addTo(map);
+            });
+
 function locateUser() {
 		map.locate({setView: true, maxZoom: 16});
 	}
