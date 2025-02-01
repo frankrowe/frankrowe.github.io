@@ -6,7 +6,8 @@
   "scripts": {
     "prebuild": "npm --no-git-tag-version version patch",
     "build": "node ./build.js",
-    "watch": "onchange './templates' './posts.json' -- npm run build"
+    "watch": "onchange './templates' './posts.json' -- npm run build",
+    "serve:local": "npx http-server ./ -p 8080"
   },
   "repository": {
     "type": "git",
