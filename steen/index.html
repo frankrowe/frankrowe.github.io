@@ -1,111 +1,222 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<base target="_top">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Mobile tutorial - Leaflet</title>
-	
-	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+  <head>
+    <base target="_top" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <title>Steen Map</title>
 
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
-		}
-		.leaflet-container {
-			height: 400px;
-			width: 600px;
-			max-width: 100%;
-			max-height: 100%;
-		}
-	</style>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="docs/images/favicon.ico"
+    />
 
-	<style>
-    body { padding: 0; margin: 0; } #map { height: 100%; width: 100vw; }
-    .locate-button {
-			position: absolute;
-			top: 100px;
-			left: 10px;
-			background: white;
-			border: 2px solid #ccc;
-			padding: 6px 12px;
-			cursor: pointer;
-			z-index: 1000;
-			border-radius: 5px;
-			font-size: 14px;
-			font-weight: bold;
-		}
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      .leaflet-container {
+        height: 400px;
+        width: 600px;
+        max-width: 100%;
+        max-height: 100%;
+      }
     </style>
-</head>
-<body>
 
-<div id='map'></div>
-<button class="locate-button" onclick="locateUser()">📍 My Location</button>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #map {
+        height: 100%;
+        width: 100vw;
+      }
+      .map-tools {
+        position: absolute;
+        top: 100px;
+        left: 10px;
 
-<script>
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+      }
 
-	const map = L.map('map').fitWorld();
+      .map-tools button {
+        background: white;
+        border: 2px solid #ccc;
+        padding: 6px 12px;
+        cursor: pointer;
+        z-index: 1000;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="map-tools">
+      <button class="locate-button" onclick="locateUser()">
+        📍 My Location
+      </button>
+    </div>
+    <script>
+      const map = L.map('map').fitWorld();
 
-	var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>'
-        }).addTo(map);
+      var satellite = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        {
+          attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+        }
+      ).addTo(map);
 
-        var tileLayer = L.tileLayer('./contours/{z}/{x}/{y}.png', {
-            attribution: '&copy; Your Name or Source'
-        }).addTo(map);
+      var tileLayer = L.tileLayer('./contours/{z}/{x}/{y}.png', {
+        attribution: '&copy; Your Name or Source',
+      }).addTo(map);
 
-        // add a geojson layer from a url
-        fetch('./wetlandlines.geojson')
-            .then(response => response.json())
-            .then(data => {
-                var wetlandlines = L.geoJSON(data).addTo(map);
+      // Create a new layer for user-added markers
+      const userMarkersLayer = L.layerGroup().addTo(map);
 
-                // zoom the map to the geojson layer
-                map.fitBounds(L.geoJSON(data).getBounds());
+      // Load saved markers from localStorage
+      function loadMarkers() {
+        const savedMarkers =
+          JSON.parse(localStorage.getItem('userMarkers')) || [];
+        savedMarkers.forEach((marker) => {
+          const { lat, lng, name } = marker;
+          addMarker(lat, lng, name);
+        });
+      }
 
-                // Define base layers
-                var baseLayers = {
-                    "Satellite": satellite,
-                    
-                };
+      // Save markers to localStorage
+      function saveMarkers() {
+        const markers = [];
+        userMarkersLayer.eachLayer((layer) => {
+          const { lat, lng } = layer.getLatLng();
+          const name = layer.options.title || 'Unnamed Marker';
+          markers.push({ lat, lng, name });
+        });
+        localStorage.setItem('userMarkers', JSON.stringify(markers));
+      }
 
-                // Define overlay layers
-                var overlayLayers = {
-                    "1ft Contour Lines": tileLayer,
-                    "Wetland Lines": wetlandlines,
-                };
+      // Add a marker to the map and userMarkersLayer
+      function addMarker(lat, lng, name = 'Unnamed Marker') {
+        const redDotIcon = L.divIcon({
+          className: 'leaflet-div-icons',
+          html: `
+      <div style="background-color: red; border-radius: 50%; width: 16px; height: 16px; 
+                border: 2px solid black; display: flex; align-items: center; justify-content: center; 
+                font-size: 10px; color: white; font-weight: bold;">
+        ${name} <!-- Display only the first letter of the name -->
+      </div>
+    `,
+          iconSize: [16, 16], // Size of the red dot
+          iconAnchor: [8, 8], // Anchor the icon at the center of the dot
+        });
+        const marker = L.marker([lat, lng], {
+          icon: redDotIcon,
+          draggable: true,
+          title: name,
+        }).addTo(userMarkersLayer);
 
-                // Add layer control to the map
-                L.control.layers(baseLayers, overlayLayers).addTo(map);
-            });
+        const popupContent = `
+    <div style="font-size: 14px; text-align: center;">
+      <p><strong>${name}</strong></p>
+      <button onclick="deleteMarker('${lat}', '${lng}')">Delete</button>
+    </div>
+  `;
+        marker.bindPopup(popupContent);
 
-function locateUser() {
-		map.locate({setView: true, maxZoom: 16});
-	}
+        // Update localStorage when the marker is dragged
+        marker.on('dragend', () => {
+          saveMarkers();
+        });
+      }
 
-	function onLocationFound(e) {
-		const radius = e.accuracy / 2;
+      function deleteMarker(lat, lng) {
+        const markerToDelete = userMarkersLayer.getLayers().find((marker) => {
+          const markerLatLng = marker.getLatLng();
+          return (
+            markerLatLng.lat === parseFloat(lat) &&
+            markerLatLng.lng === parseFloat(lng)
+          );
+        });
 
-		const locationCircle = L.circle(e.latlng, radius).addTo(map);
-	}
+        if (markerToDelete && confirm('Do you want to delete this marker?')) {
+          userMarkersLayer.removeLayer(markerToDelete); // Remove marker from the map
+          saveMarkers(); // Update localStorage after deletion
+        }
+      }
 
-	function onLocationError(e) {
-		alert(e.message);
-	}
+      // Add a marker when the map is clicked
+      map.on('click', (e) => {
+        const name = prompt('Enter a name for this marker:');
+        if (name) {
+          addMarker(e.latlng.lat, e.latlng.lng, name);
+          saveMarkers();
+        }
+      });
 
-	map.on('locationfound', onLocationFound);
-	map.on('locationerror', onLocationError);
+      // Load saved markers when the page loads
+      loadMarkers();
 
-	//map.locate({setView: true, maxZoom: 16});
-</script>
+      // Add GeoJSON layer
+      fetch('./wetlandlines.geojson')
+        .then((response) => response.json())
+        .then((data) => {
+          var wetlandlines = L.geoJSON(data).addTo(map);
 
+          // Zoom the map to the GeoJSON layer
+          map.fitBounds(L.geoJSON(data).getBounds());
 
+          // Define base layers
+          var baseLayers = {
+            Satellite: satellite,
+          };
 
-</body>
+          // Define overlay layers
+          var overlayLayers = {
+            '1ft Contour Lines': tileLayer,
+            'Wetland Lines': wetlandlines,
+            'My Markers': userMarkersLayer,
+          };
+
+          // Add layer control to the map
+          L.control.layers(baseLayers, overlayLayers).addTo(map);
+        });
+
+      // Location functions
+      function locateUser() {
+        map.locate({ setView: true, maxZoom: 16 });
+      }
+
+      function onLocationFound(e) {
+        const radius = e.accuracy / 2;
+        const locationCircle = L.circle(e.latlng, radius).addTo(map);
+      }
+
+      function onLocationError(e) {
+        alert(e.message);
+      }
+
+      map.on('locationfound', onLocationFound);
+      map.on('locationerror', onLocationError);
+    </script>
+  </body>
 </html>
