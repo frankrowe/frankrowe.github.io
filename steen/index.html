@@ -91,6 +91,10 @@
         attribution: '&copy; Your Name or Source',
       }).addTo(map);
 
+      var tileLayer2 = L.tileLayer('./contours6/{z}/{x}/{y}.png', {
+        attribution: '&copy; Your Name or Source',
+      }).addTo(map);
+
       // Create a new layer for user-added markers
       const userMarkersLayer = L.layerGroup().addTo(map);
 
@@ -192,6 +196,7 @@
 
           // Define overlay layers
           var overlayLayers = {
+            '6in Contour Lines': tileLayer2,
             '1ft Contour Lines': tileLayer,
             'Wetland Lines': wetlandlines,
             'My Markers': userMarkersLayer,

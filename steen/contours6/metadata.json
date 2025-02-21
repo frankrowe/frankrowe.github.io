@@ -1,0 +1,9 @@
+{
+    "format": "png",
+    "name": "OUTPUT_FILE",
+    "version": "1.1",
+    "type": "overlay",
+    "minzoom": "12",
+    "maxzoom": "18",
+    "bounds": "-75.1644,38.3509,-75.1436,38.3705"
+}
