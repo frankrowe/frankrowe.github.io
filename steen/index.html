@@ -76,6 +76,11 @@
       <button class="locate-button" onclick="locateUser()">
         📍 My Location
       </button>
+      <button class="locate-button" onclick="toggleLayer()">
+        <input type="checkbox" id="checkbox" />
+
+        6 inch Contours
+      </button>
     </div>
     <script>
       const map = L.map('map').fitWorld();
@@ -124,12 +129,12 @@
         const redDotIcon = L.divIcon({
           className: 'leaflet-div-icons',
           html: `
-      <div style="background-color: red; border-radius: 50%; width: 16px; height: 16px; 
-                border: 2px solid black; display: flex; align-items: center; justify-content: center; 
-                font-size: 10px; color: white; font-weight: bold;">
-        ${name} <!-- Display only the first letter of the name -->
-      </div>
-    `,
+          <div style="background-color: red; border-radius: 50%; width: 16px; height: 16px;
+                    border: 2px solid black; display: flex; align-items: center; justify-content: center;
+                    font-size: 10px; color: white; font-weight: bold;">
+            ${name} <!-- Display only the first letter of the name -->
+          </div>
+        `,
           iconSize: [16, 16], // Size of the red dot
           iconAnchor: [8, 8], // Anchor the icon at the center of the dot
         });
@@ -140,11 +145,11 @@
         }).addTo(userMarkersLayer);
 
         const popupContent = `
-    <div style="font-size: 14px; text-align: center;">
-      <p><strong>${name}</strong></p>
-      <button onclick="deleteMarker('${lat}', '${lng}')">Delete</button>
-    </div>
-  `;
+        <div style="font-size: 14px; text-align: center;">
+          <p><strong>${name}</strong></p>
+          <button onclick="deleteMarker('${lat}', '${lng}')">Delete</button>
+        </div>
+      `;
         marker.bindPopup(popupContent);
 
         // Update localStorage when the marker is dragged
@@ -180,31 +185,44 @@
       // Load saved markers when the page loads
       loadMarkers();
 
-      // Add GeoJSON layer
-      fetch('./wetlandlines.geojson')
-        .then((response) => response.json())
-        .then((data) => {
-          var wetlandlines = L.geoJSON(data).addTo(map);
+      async function makeLayers() {
+        // Add GeoJSON layer
+        const response = await fetch('./wetlandlines.geojson');
+        const data = await response.json();
 
-          // Zoom the map to the GeoJSON layer
-          map.fitBounds(L.geoJSON(data).getBounds());
+        var wetlandlines = L.geoJSON(data).addTo(map);
 
-          // Define base layers
-          var baseLayers = {
-            Satellite: satellite,
-          };
+        const response2 = await fetch('./wetlands-3-23.geojson');
+        const data2 = await response2.json();
+        const wetlands = L.geoJSON(data2, {
+          style: {
+            color: 'red', // Set the line color to red
+            weight: 2, // Set the line weight
+          },
+        }).addTo(map);
 
-          // Define overlay layers
-          var overlayLayers = {
-            '6in Contour Lines': tileLayer2,
-            '1ft Contour Lines': tileLayer,
-            'Wetland Lines': wetlandlines,
-            'My Markers': userMarkersLayer,
-          };
+        // Zoom the map to the GeoJSON layer
+        map.fitBounds(L.geoJSON(data).getBounds());
 
-          // Add layer control to the map
-          L.control.layers(baseLayers, overlayLayers).addTo(map);
-        });
+        // Define base layers
+        var baseLayers = {
+          Satellite: satellite,
+        };
+
+        // Define overlay layers
+        var overlayLayers = {
+          '6in Contour Lines': tileLayer2,
+          '1ft Contour Lines': tileLayer,
+          'Wetland Lines': wetlandlines,
+          'Wetland Lines 3-23-25': wetlands,
+          'My Markers': userMarkersLayer,
+        };
+
+        // Add layer control to the map
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+      }
+
+      makeLayers();
 
       // Location functions
       function locateUser() {
@@ -222,6 +240,8 @@
 
       map.on('locationfound', onLocationFound);
       map.on('locationerror', onLocationError);
+
+      function toggleLayer(layerId) {}
     </script>
   </body>
 </html>
